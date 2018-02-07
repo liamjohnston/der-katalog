@@ -1,4 +1,6 @@
-My record collection. 
+My record collection. View it here:
+http://derkatalog.surge.sh/
+(I am still in the middle of cataloging everything)
 
 A work in progress... todo:
 - Make better UI, especially desktop
