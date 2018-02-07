@@ -10,12 +10,6 @@ import 'react-rangeslider/lib/index.css';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 class AddEditItem extends Component {
-  state = {
-    loading: true,
-    saving: false,
-    mode: this.props.mode,
-    itemId: this.props.match.params.id
-  };
   constructor(props, context) {
     super(props, context);
 
@@ -28,6 +22,13 @@ class AddEditItem extends Component {
     this.handleSleeveConditionChange = this.handleSleeveConditionChange.bind(
       this
     );
+
+    this.state = {
+      loading: true,
+      saving: false,
+      mode: this.props.mode,
+      itemId: this.props.match.params.id
+    };
   }
 
   //TODO: generic slider handler instead of 3x functions.
@@ -185,7 +186,7 @@ class AddEditItem extends Component {
             />
             <label className="card-label">
               Sort name<br />
-              <span className="muted">(if different)</span>
+              <span className="muted fw-normal text-sm">(if different)</span>
             </label>
             <input
               type="text"
@@ -358,7 +359,7 @@ class AddEditItem extends Component {
             <textarea
               type="text"
               className="form-field"
-              rows="3"
+              rows="4"
               defaultValue={details ? details.notes : ''}
               ref={input => {
                 this.notes = input;

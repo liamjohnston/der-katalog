@@ -21,7 +21,7 @@ class App extends Component {
     this.saveItem = this.saveItem.bind(this);
 
     this.state = {
-      items: {},
+      items: [],
       user: null,
       liam_uid: 'zsf5lFlYrAN7sCsTsxYpoYklo9a2',
       itMe: false
@@ -57,30 +57,30 @@ class App extends Component {
       return false;
     }
 
-    const items = { ...this.state.items };
+    const items = [...this.state.items];
     const timestamp = Date.now();
-
+    debugger;
     //if new item without existing id, give it a unique id (based on timestamp)
     if (!item.id) {
       item.id = timestamp;
       items[`${timestamp}`] = item;
     } else {
-      items[item.id] = item;
+      const index = items.findIndex(x => x.id === item.id);
+      items[index] = item;
     }
 
-    this.setState({ items });
+    debugger;
+    //this.setState({ items });
   };
 
   componentDidMount() {
     base.syncState(`items`, {
       context: this,
-      state: 'items'
-      //WAIT!!! this sorted it but also seemed to duplicate my database when i saved one :((((
-      //Be sure to comment the setState in the save function while testing this.
-      // asArray: true, -CAUTION-
-      // queries: {-CAUTION-
-      //   orderByChild: 'artist'-CAUTION-
-      // }-CAUTION-
+      state: 'items',
+      asArray: true,
+      queries: {
+        orderByChild: 'artist'
+      }
     });
 
     auth.onAuthStateChanged(user => {

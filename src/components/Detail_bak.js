@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Image, CloudinaryContext, Transformation } from 'cloudinary-react';
+import { renderStars } from '../helpers';
 
+import firebase from 'firebase';
 import base from '../firebase';
 
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 class Detail extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       details: {}
@@ -20,30 +22,24 @@ class Detail extends Component {
     base.bindToState(`items/${item}`, {
       context: this,
       state: 'details'
-      //  asArray: true
-    });
-  }
-
-  //seems to break going back to list view
-  // componentWillUnmount() {
-  //   base.removeBinding(this.ref);
-  // }
-
-  /* temporarily duplicating this while i figure out how to pass both params AND prop functions via Route */
-  renderStars(rating) {
-    let str = [];
-    const whole = Math.floor(rating);
-
-    Array.from(Array(whole), (_, i) => {
-      return str.push(<i className="icon-star" key={i} />);
     });
 
-    ///...why is this backwards?
-    if (!Number.isInteger(rating)) {
-      str.push(<i className="icon-star-half" key={rating} />);
-    }
+    var ref = firebase.database().ref('items');
+    ref
+      .orderByChild('id')
+      .equalTo(item)
+      .once('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var value = childSnapshot.val();
+          console.log('Title is : ' + value.title);
+        });
+      });
+    // .on('child_added', snapshot => {
+    //   console.log(snapshot.key);
+    //   debugger;
+    // });
 
-    return str;
+    //  console.log(ref);
   }
 
   render() {
@@ -88,9 +84,12 @@ class Detail extends Component {
               <div>
                 <div className="mb-s">Vinyl:</div>
                 {details.mediaCondition ? (
-                  <span className="stars">
-                    {this.renderStars(details.mediaCondition)}
-                  </span>
+                  <div
+                    className="stars card-value"
+                    dangerouslySetInnerHTML={{
+                      __html: renderStars(details.mediaCondition)
+                    }}
+                  />
                 ) : (
                   <span className="muted">-</span>
                 )}{' '}
@@ -98,9 +97,12 @@ class Detail extends Component {
               <div>
                 <div className="mb-s">Sleeve:</div>
                 {details.sleeveCondition ? (
-                  <span className="stars">
-                    {this.renderStars(details.sleeveCondition)}
-                  </span>
+                  <div
+                    className="stars card-value"
+                    dangerouslySetInnerHTML={{
+                      __html: renderStars(details.sleeveCondition)
+                    }}
+                  />
                 ) : (
                   <span className="muted">-</span>
                 )}
@@ -109,22 +111,33 @@ class Detail extends Component {
           </div>
           <div className="card detail-card">
             <h3 className="card-title center">My notes</h3>
+            <label className="card-label">Rating:</label>
+            {details.rating <= 0 ? (
+              <span className="muted">Not rated yet</span>
+            ) : (
+              <div
+                className="stars card-value"
+                dangerouslySetInnerHTML={{
+                  __html: renderStars(details.rating)
+                }}
+              />
+            )}
             <label className="card-label">Notes:</label>
             <div className="detail-year card-value">
               {details.notes || <span className="muted">No notes</span>}
             </div>
-            <label className="card-label">My rating:</label>
-            <div className="stars card-value">
-              {this.renderStars(details.rating)}
-            </div>
           </div>
-          {/* TODO: maybe move edit to header, swap out with list view options as needed */}
-          <Link
-            to={`/edit/${details.id}`}
-            className="btn btn-primary js-center"
-          >
-            Edit
-          </Link>
+
+          {this.props.itMe ? (
+            <Link
+              to={`/edit/${details.id}`}
+              className="btn btn-primary js-center"
+            >
+              Edit details
+            </Link>
+          ) : (
+            ''
+          )}
         </div>
       );
     }

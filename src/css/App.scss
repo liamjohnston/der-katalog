@@ -1,5 +1,6 @@
-$gutter: 1.5rem;
-$brand: red;
+$gutter-sm: 1rem;
+$gutter-md: 1.5rem;
+$gutter-lg: 2rem;
 
 html {
   box-sizing: border-box;
@@ -16,8 +17,10 @@ html {
 
 body {
   font-size: 1.4rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
-    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  // font-family: system-ui,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+  //   Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: 'Courier New', Courier, 'Lucida Sans Typewriter',
+    'Lucida Typewriter', monospace;
   //  min-height: 100vh;
   //font-family: sans-serif;
   background: #eeeeee;
@@ -36,6 +39,12 @@ p {
 // .hidden {
 //   display: none !important;
 // }
+label {
+  font-weight: bold;
+}
+.fw-normal {
+  font-weight: normal;
+}
 .d-flex {
   display: flex;
 }
@@ -55,7 +64,7 @@ p {
   margin-left: 1rem;
 }
 .mb-s {
-  margin-bottom: $gutter / 2;
+  margin-bottom: $gutter-md / 2;
 }
 .js-center {
   justify-self: center;
@@ -67,6 +76,8 @@ p {
   justify-content: space-between;
 }
 .btn {
+  font-family: 'Courier New', Courier, 'Lucida Sans Typewriter',
+    'Lucida Typewriter', monospace;
   outline: none;
   background: #eee;
   color: #444;
@@ -120,8 +131,10 @@ p {
 }
 .form-field {
   border: 1px solid #ccc;
-  //border-radius: 4px;
-  padding: 1rem;
+  align-self: start;
+  padding: 0 1rem;
+  height: 3.5rem;
+  line-height: 3.5rem;
 }
 .card-label {
   align-self: center;
@@ -159,19 +172,23 @@ p {
   color: #fff;
   display: grid;
   //grid-template-columns: 7rem 1fr 7rem;
-  grid-template-columns: 1fr 7rem;
-  //height: 5rem;
-  padding: $gutter;
+  //grid-template-columns: 1fr 7rem;
+  grid-template-columns: auto auto;
+  align-items: center;
+  padding: 0 $gutter-sm;
+  height: 5rem;
 }
 
 .header-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0;
+  //  font-size: 2rem;
+  //  font-weight: bold;
+  //  margin: 0;
   //text-align: center;
-  align-self: center;
+  //align-self: center;
+  font-size: 0;
 }
 .header-auth-link {
+  justify-self: end;
 }
 .header-back-link {
 }
@@ -179,7 +196,7 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 0.8rem $gutter;
+  padding: 0.8rem $gutter-sm;
 }
 .list-btns {
   display: flex;
@@ -187,10 +204,10 @@ p {
 .album-list {
   list-style-type: none;
   margin: 0;
-  padding: 0 1.5rem 2rem;
+  padding: 0 $gutter-sm $gutter-lg;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 1.5rem;
+  grid-gap: $gutter-sm;
 }
 .album-list-item a {
   text-decoration: none;
@@ -264,10 +281,10 @@ p {
   justify-self: center;
 
   display: grid;
-  grid-template-columns: 2rem 1fr 2rem;
+  grid-template-columns: $gutter-md 1fr $gutter-md;
 
   grid-auto-flow: row;
-  padding-bottom: 2rem;
+  padding-bottom: $gutter-lg;
   > * {
     grid-column: 2 / -2;
   }
@@ -296,7 +313,7 @@ p {
 .detail-card {
   position: relative;
   z-index: 10;
-  margin-bottom: 2rem;
+  margin-bottom: $gutter-lg;
   display: grid;
   grid-template-columns: 2fr 4fr;
   grid-gap: 1rem;
@@ -309,11 +326,11 @@ p {
   padding-bottom: 1rem;
 }
 .add-form {
-  padding-top: 2rem;
+  padding-top: $gutter-md;
 }
 
 .main-detail {
-  margin-top: -2rem;
+  margin-top: -$gutter-md;
 }
 
 .stars {
@@ -326,7 +343,6 @@ p {
 .split-btns {
   .btn {
     border: 1px solid #ccc;
-    //  color: $brand;
     //  background: #fff;
     margin-left: -1px;
     border-radius: 0;
@@ -345,7 +361,7 @@ p {
     }
   }
   .active {
-    background: transparent;
+    background: #fff;
   }
   &.split-3 {
     display: grid;
@@ -403,7 +419,7 @@ input::-webkit-inner-spin-button {
 .rangeslider__handle-label {
   align-self: center;
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 /* END slider overrides */
 
@@ -444,12 +460,12 @@ input::-webkit-inner-spin-button {
 /* FONTELLO stuff */
 @font-face {
   font-family: 'fontello';
-  src: url('../font/fontello.eot?51062908');
-  src: url('../font/fontello.eot?51062908#iefix') format('embedded-opentype'),
-    url('../font/fontello.woff2?51062908') format('woff2'),
-    url('../font/fontello.woff?51062908') format('woff'),
-    url('../font/fontello.ttf?51062908') format('truetype'),
-    url('../font/fontello.svg?51062908#fontello') format('svg');
+  src: url('../font/fontello.eot?82282461');
+  src: url('../font/fontello.eot?82282461#iefix') format('embedded-opentype'),
+    url('../font/fontello.woff2?82282461') format('woff2'),
+    url('../font/fontello.woff?82282461') format('woff'),
+    url('../font/fontello.ttf?82282461') format('truetype'),
+    url('../font/fontello.svg?82282461#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -483,5 +499,11 @@ input::-webkit-inner-spin-button {
 .icon-star-half:before {
   content: '\e801';
   text-align: left; /* not ideal */
+}
+.icon-th-large:before {
+  content: '\e802';
+}
+.icon-list:before {
+  content: '\e803';
 }
 /* END FONTELLO stuff */

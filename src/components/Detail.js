@@ -92,17 +92,21 @@ class Detail extends Component {
           </div>
           <div className="card detail-card">
             <h3 className="card-title center">My notes</h3>
+            <label className="card-label">Rating:</label>
+            {details.rating <= 0 ? (
+              <span className="muted">Not rated yet</span>
+            ) : (
+              <div
+                className="stars card-value"
+                dangerouslySetInnerHTML={{
+                  __html: renderStars(details.rating)
+                }}
+              />
+            )}
             <label className="card-label">Notes:</label>
             <div className="detail-year card-value">
               {details.notes || <span className="muted">No notes</span>}
             </div>
-            <label className="card-label">My rating:</label>
-            <div
-              className="stars card-value"
-              dangerouslySetInnerHTML={{
-                __html: renderStars(details.rating)
-              }}
-            />
           </div>
 
           {this.props.itMe ? (
@@ -110,7 +114,7 @@ class Detail extends Component {
               to={`/edit/${details.id}`}
               className="btn btn-primary js-center"
             >
-              Edit
+              Edit details
             </Link>
           ) : (
             ''
