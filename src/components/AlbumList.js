@@ -62,7 +62,7 @@ class List extends Component {
     } else {
       return (
         <Fragment>
-          <div className="options-bar mt-1 mb-1">
+          <div className="options-bar mt-2 mb-2">
             <div className="search-wrap">
               {/* TODO: debounce search */}
               {/* <DebounceInput
@@ -89,15 +89,15 @@ class List extends Component {
               changeFilterMode={this.changeFilterMode}
             />
 
-            <div className="list-btns">
-              <div className="view-options split-btns">
+            <div className="list-btns al-self-flex-end">
+              <div className="view-options split-btns hide-xs">
                 <button
                   className={`btn ${
                     this.state.viewMode === 'grid' ? 'active' : ''
                   }`}
                   onClick={() => this.changeViewMode('grid')}
                 >
-                  <i className="icon-th-large" />
+                  <i className="icon icon-th-large" />
                 </button>
                 <button
                   className={`btn ${
@@ -105,12 +105,12 @@ class List extends Component {
                   }`}
                   onClick={() => this.changeViewMode('list')}
                 >
-                  <i className="icon-list" />
+                  <i className="icon icon-list" />
                 </button>
               </div>
               {this.props.itMe ? (
                 <Link to="/add" className="btn btn-success ml-1">
-                  + Add
+                  Add
                 </Link>
               ) : (
                 ''
@@ -183,6 +183,17 @@ class List extends Component {
                 </LazyLoad>
               ))}
           </ul>
+          <footer>
+            Made with{' '}
+            <span role="img" aria-label="heart emoji">
+              ❤️
+            </span>{' '}
+            &{' '}
+            <span role="img" aria-label="react emoji">
+              ⚛️
+            </span>{' '}
+            by <a href="http://liam.nz">Liam</a>
+          </footer>
         </Fragment>
       );
     }

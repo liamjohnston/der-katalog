@@ -3,13 +3,16 @@ import React, { Component } from 'react';
 class SearchBox extends Component {
   render() {
     return (
-      <input
-        id="search"
-        className="form-field"
-        defaultValue={this.props.query}
-        onChange={this.props.handleSearch}
-        placeholder="Artist or album"
-      />
+      <div>
+        <label>Search</label>
+        <input
+          id="search"
+          className="form-field mt-xs"
+          defaultValue={this.props.query}
+          onChange={this.props.handleSearch}
+          placeholder="Artist or album"
+        />
+      </div>
     );
   }
 }

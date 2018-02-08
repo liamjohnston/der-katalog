@@ -90,7 +90,7 @@ class Detail extends Component {
               </div>
             </div>
           </div>
-          <div className="card detail-card">
+          <div className="card detail-card extra-detail">
             <h3 className="card-title center">My notes</h3>
             <label className="card-label">Rating:</label>
             {details.rating <= 0 ? (

@@ -11,6 +11,7 @@ import Detail from './Detail';
 import AddEditItem from './AddEditItem';
 
 import 'normalize.css';
+import '../css/fontello.css';
 import '../css/App.min.css';
 
 class App extends Component {

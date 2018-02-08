@@ -2,6 +2,8 @@ $gutter-sm: 1rem;
 $gutter-md: 1.5rem;
 $gutter-lg: 2rem;
 
+$bg: #eee;
+
 html {
   box-sizing: border-box;
 }
@@ -23,7 +25,7 @@ body {
     'Lucida Typewriter', monospace;
   //  min-height: 100vh;
   //font-family: sans-serif;
-  background: #eeeeee;
+  background: $bg;
 }
 
 h1,
@@ -75,8 +77,23 @@ label {
 .mb-1 {
   margin-bottom: $gutter-sm;
 }
+.mt-2 {
+  margin-top: $gutter-md;
+}
+.mb-2 {
+  margin-bottom: $gutter-md;
+}
+.mb-xs {
+  margin-bottom: $gutter-sm / 2;
+}
+.mt-xs {
+  margin-top: $gutter-sm / 2;
+}
 .js-center {
   justify-self: center;
+}
+.al-self-flex-end {
+  align-self: flex-end;
 }
 .w-100 {
   width: 100%;
@@ -88,7 +105,7 @@ label {
   font-family: 'Courier New', Courier, 'Lucida Sans Typewriter',
     'Lucida Typewriter', monospace;
   outline: none;
-  background: #eee;
+  background: $bg;
   color: #444;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -140,6 +157,7 @@ label {
 }
 .form-field {
   border: 1px solid #ccc;
+  display: block;
   align-self: start;
 
   &:not(textarea) {
@@ -168,7 +186,8 @@ textarea {
   min-height: 100vh;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  //grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr;
 }
 .main-header,
 .options-bar,
@@ -183,38 +202,42 @@ textarea {
   z-index: 100;
 }
 .title-bar {
-  background: #333;
-  color: #fff;
+  background: #222;
   display: grid;
-  //grid-template-columns: 7rem 1fr 7rem;
-  //grid-template-columns: 1fr 7rem;
   grid-template-columns: auto auto;
   align-items: center;
   padding: 0 $gutter-sm;
   height: 5rem;
 }
-
 .header-title {
-  //  font-size: 2rem;
-  //  font-weight: bold;
-  //  margin: 0;
-  //text-align: center;
-  //align-self: center;
   font-size: 0;
 }
 .header-auth-link {
   justify-self: end;
 }
-.header-back-link {
-}
 .options-bar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: baseline;
-  padding: 0.8rem $gutter-sm;
+  padding: $gutter-sm;
+  position: sticky;
+  top: 5rem;
+  background: $bg;
 }
 .list-btns {
   display: flex;
+}
+.filter-options {
+  .icon {
+    //font-size: 1.2em;
+  }
+  .icon-cd-1 {
+    //    font-size: 1.2em;
+  }
+  .icon-cd-2 {
+    font-size: 0.7em;
+  }
 }
 .album-list {
   list-style-type: none;
@@ -258,7 +281,7 @@ textarea {
   .placeholder-info {
     height: 0.9em;
     width: 40%;
-    background: #eee;
+    background: $bg;
     &:nth-of-type(2) {
       width: 60%;
     }
@@ -268,24 +291,6 @@ textarea {
   }
   .item-thumb {
     opacity: 0.3;
-  }
-}
-
-.list-mode {
-  grid-template-columns: 1fr;
-  grid-gap: 1px;
-  .album-list-item a {
-    grid-template-columns: 5rem 1fr;
-  }
-  .item-thumb {
-    width: 5rem;
-    height: 5rem;
-  }
-  .item-details {
-    display: grid;
-    grid-template-columns: 2fr 3fr 1fr 9rem;
-  }
-  .stars {
   }
 }
 
@@ -413,6 +418,18 @@ input::-webkit-inner-spin-button {
   }
 }
 
+footer {
+  color: #888;
+  padding: 3rem 0;
+  text-align: center;
+}
+
+/* responsive helpers */
+.hide-xs {
+  display: none !important;
+}
+/* END responsive helpers */
+
 /* slider overrides */
 .rangeslider-horizontal .rangeslider__handle {
   display: flex;
@@ -472,60 +489,74 @@ input::-webkit-inner-spin-button {
   }
 }
 
-/* FONTELLO stuff */
-@font-face {
-  font-family: 'fontello';
-  src: url('../font/fontello.eot?82282461');
-  src: url('../font/fontello.eot?82282461#iefix') format('embedded-opentype'),
-    url('../font/fontello.woff2?82282461') format('woff2'),
-    url('../font/fontello.woff?82282461') format('woff'),
-    url('../font/fontello.ttf?82282461') format('truetype'),
-    url('../font/fontello.svg?82282461#fontello') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-[class^='icon-']:before,
-[class*=' icon-']:before {
-  font-family: 'fontello';
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
-
-  display: inline-block;
-  text-decoration: inherit;
-  width: 1em;
-  text-align: center;
-
-  /* For safety - reset parent styles, that can break glyph codes*/
-  font-variant: normal;
-  text-transform: none;
-
-  line-height: 1em;
-
-  /* Font smoothing. That was taken from TWBS */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-star:before {
-  content: '\e800';
-}
+/* FONTELLO overrides */
 .icon-star-half:before {
   content: '\e801';
   text-align: left; /* not ideal */
 }
-.icon-th-large:before {
-  content: '\e802';
-}
-.icon-list:before {
-  content: '\e803';
-}
-/* END FONTELLO stuff */
+/* END FONTELLO overrides */
 
 @media (min-width: 600px) {
-  .album-list {
+  .hide-xs {
+    display: block !important;
+  }
+  .album-list.grid-mode {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: $gutter-md;
   }
+  .list-mode {
+    grid-template-columns: 1fr;
+    grid-gap: 1px;
+    .album-list-item a {
+      grid-template-columns: 5rem 1fr;
+    }
+    .album-list-item-placeholder {
+      grid-template-columns: 5rem 1fr;
+      .placeholder-info:nth-of-type(3) {
+        width: 100%;
+      }
+    }
+    .item-thumb {
+      width: 5rem;
+      height: 5rem;
+    }
+    .item-details {
+      display: grid;
+      grid-template-columns: 2fr 3fr 1fr 9rem;
+    }
+    .stars {
+    }
+  }
+}
+@media (min-width: 800px) {
+  // .detail-wrap:not(.add-form) {
+  //   width: 100%;
+  //   max-width: 100%;
+  //   padding: $gutter-md;
+  //   display: grid;
+  //   grid-template-columns: 30rem 1fr 1fr;
+  //   grid-gap: $gutter-md;
+  //
+  //   .detail-image {
+  //     grid-column: 1;
+  //     grid-row: 1;
+  //     position: static;
+  //     img {
+  //       width: 100%;
+  //     }
+  //   }
+  //   .detail-card {
+  //     margin-bottom: 0;
+  //   }
+  //   .add-form {
+  //     padding-top: $gutter-md;
+  //   }
+  //
+  //   .main-detail {
+  //     margin-top: 0;
+  //   }
+  //   .extra-detail {
+  //     grid-column: 3;
+  //   }
+  // }
 }
