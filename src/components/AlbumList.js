@@ -6,7 +6,9 @@ import LazyLoad, { forceCheck } from 'react-lazyload';
 
 import ListItem from './ListItem';
 import Placeholder from './Placeholder';
-import SearchBox from './SearchBox';
+import SearchBox from './ListOptions/SearchBox';
+import FormatFilter from './ListOptions/FormatFilter';
+import SortOptions from './ListOptions/SortOptions';
 
 class List extends Component {
   constructor() {
@@ -77,57 +79,15 @@ class List extends Component {
               />
             </div>
 
-            <div className="sort-options split-btns">
-              <button
-                className={`btn ${
-                  this.state.sortBy === 'artist' ? 'active' : ''
-                }`}
-                onClick={() => this.changeSortMode('artist')}
-              >
-                Artist
-              </button>
-              <button
-                className={`btn ${
-                  this.state.sortBy === 'year' ? 'active' : ''
-                }`}
-                onClick={() => this.changeSortMode('year')}
-              >
-                Year
-              </button>
-              <button
-                className={`btn ${
-                  this.state.sortBy === 'rating' ? 'active' : ''
-                }`}
-                onClick={() => this.changeSortMode('rating')}
-              >
-                Rating
-              </button>
-            </div>
+            <SortOptions
+              sortBy={this.state.sortBy}
+              changeSortMode={this.changeSortMode}
+            />
 
-            <div className="filter-options split-btns">
-              <button
-                className={`btn ${this.state.filter === 'all' ? 'active' : ''}`}
-                onClick={() => this.changeFilterMode('all')}
-              >
-                All
-              </button>
-              <button
-                className={`btn ${
-                  this.state.filter === 'albums' ? 'active' : ''
-                }`}
-                onClick={() => this.changeFilterMode('albums')}
-              >
-                Albums
-              </button>
-              <button
-                className={`btn ${
-                  this.state.filter === 'singles' ? 'active' : ''
-                }`}
-                onClick={() => this.changeFilterMode('singles')}
-              >
-                Single/EP
-              </button>
-            </div>
+            <FormatFilter
+              filter={this.state.filter}
+              changeFilterMode={this.changeFilterMode}
+            />
 
             <div className="list-btns">
               <div className="view-options split-btns">

@@ -132,9 +132,15 @@ label {
 .form-field {
   border: 1px solid #ccc;
   align-self: start;
-  padding: 0 1rem;
-  height: 3.5rem;
-  line-height: 3.5rem;
+
+  &:not(textarea) {
+    padding: 0 1rem;
+    height: 3.5rem;
+    line-height: 3.5rem;
+  }
+}
+textarea {
+  padding: 0.5rem 1rem;
 }
 .card-label {
   align-self: center;

@@ -357,9 +357,8 @@ class AddEditItem extends Component {
             </div>
             <label className="card-label align-self-start">Notes</label>
             <textarea
-              type="text"
               className="form-field"
-              rows="4"
+              rows="3"
               defaultValue={details ? details.notes : ''}
               ref={input => {
                 this.notes = input;
