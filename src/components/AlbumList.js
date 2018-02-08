@@ -62,7 +62,7 @@ class List extends Component {
     } else {
       return (
         <Fragment>
-          <div className="options-bar">
+          <div className="options-bar mt-1 mb-1">
             <div className="search-wrap">
               {/* TODO: debounce search */}
               {/* <DebounceInput

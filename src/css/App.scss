@@ -51,6 +51,9 @@ label {
 .flex-nowrap {
   flex-wrap: nowrap;
 }
+.nowrap {
+  white-space: nowrap;
+}
 .center {
   text-align: center;
 }
@@ -65,6 +68,12 @@ label {
 }
 .mb-s {
   margin-bottom: $gutter-md / 2;
+}
+.mt-1 {
+  margin-top: $gutter-sm;
+}
+.mb-1 {
+  margin-bottom: $gutter-sm;
 }
 .js-center {
   justify-self: center;
@@ -212,7 +221,7 @@ textarea {
   margin: 0;
   padding: 0 $gutter-sm $gutter-lg;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: 1fr;
   grid-gap: $gutter-sm;
 }
 .album-list-item a {
@@ -513,3 +522,10 @@ input::-webkit-inner-spin-button {
   content: '\e803';
 }
 /* END FONTELLO stuff */
+
+@media (min-width: 600px) {
+  .album-list {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: $gutter-md;
+  }
+}

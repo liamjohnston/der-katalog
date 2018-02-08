@@ -1,28 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Image, CloudinaryContext, Transformation } from 'cloudinary-react';
 import { renderStars } from '../helpers';
+
+const IMG_PATH = '//res.cloudinary.com/diouve9dy/image/upload/';
 
 class ListItem extends Component {
   render() {
     const itemDetails = this.props.details;
+    const img_size = this.props.viewMode === 'grid' ? 240 : 100;
     return (
       <li className="album-list-item" key={itemDetails.id}>
         <Link to={`/detail/${itemDetails.id}`}>
-          {/* TODO: update height if list view vs grid view */}
           {itemDetails.artworkId ? (
-            <CloudinaryContext cloudName="diouve9dy" className="item-thumb">
-              <Image
-                publicId={itemDetails.artworkId}
-                alt={`Album cover for ${itemDetails.title}`}
-              >
-                <Transformation
-                  width={this.props.viewMode === 'grid' ? 240 : 100}
-                  height={this.props.viewMode === 'grid' ? 240 : 100}
-                  crop="scale"
-                />
-              </Image>
-            </CloudinaryContext>
+            <img
+              src={`${IMG_PATH}c_scale,h_${img_size},w_${img_size}/v1/${
+                itemDetails.artworkId
+              }`}
+              className="item-thumb"
+              alt={`Album cover for ${itemDetails.title}`}
+            />
           ) : (
             <img
               className="item-thumb"
@@ -45,7 +41,7 @@ class ListItem extends Component {
                 }}
               />
             ) : (
-              <span className="muted text-sm">Not rated yet</span>
+              <span className="muted text-sm nowrap">Not rated yet</span>
             )}
           </div>
         </Link>
