@@ -41,7 +41,7 @@ class ListItem extends Component {
                 }}
               />
             ) : (
-              <span className="muted text-sm nowrap">Not rated yet</span>
+              <div className="muted text-sm nowrap">Not rated yet</div>
             )}
           </div>
         </Link>

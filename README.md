@@ -5,8 +5,12 @@ http://derkatalog.surge.sh/
 A work in progress... todo:
 
 * Make better UI, especially desktop
-* Finish cataloging records (very time-consuming)
+* Choose a better font than courier new if that's possible
+* Fix weird textarea resizing issue
+* (maybe) Table-style sorting on list view??
+* Scroll-to-top on the list page, e.g. searching, re-rendering(?)
+* Finish cataloging (very time-consuming but nearly there)
 
-App build with React. Data stored in Firebase. Firebase also handles the auth (oauth), so only I may add/edit records.
+App build with React. Data stored in Firebase. Firebase also handles the (o)auth, so only I may add/edit records.
 
 Images hosted/sourced/cropped via Cloudinary widget.

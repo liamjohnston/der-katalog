@@ -4,7 +4,7 @@ class FormatFilter extends Component {
   render() {
     return (
       <div>
-        <label>Formats</label>
+        <label>LPs/Singles</label>
         <div className="filter-options split-btns mt-xs">
           <button
             className={`btn ${this.props.filter === 'all' ? 'active' : ''}`}

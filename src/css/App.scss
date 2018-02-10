@@ -159,6 +159,7 @@ label {
   border: 1px solid #ccc;
   display: block;
   align-self: start;
+  font-size: 1.6rem;
 
   &:not(textarea) {
     padding: 0 1rem;
@@ -221,9 +222,13 @@ textarea {
   justify-content: space-between;
   align-items: baseline;
   padding: $gutter-sm;
+  padding-top: 0;
   position: sticky;
   top: 5rem;
   background: $bg;
+  > div {
+    margin-top: $gutter-sm;
+  }
 }
 .list-btns {
   display: flex;
@@ -461,7 +466,7 @@ footer {
   height: 5rem;
   border-radius: 50%;
   position: relative;
-  margin: 5rem auto;
+  margin: 10rem auto;
   &::before,
   &::after {
     content: '';
@@ -504,6 +509,15 @@ footer {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: $gutter-md;
   }
+
+  // .album-list-item a {
+  //   grid-template-columns: 12rem 1fr;
+  // }
+  // .item-thumb {
+  //   width: 12rem;
+  //   height: 12rem;
+  // }
+
   .list-mode {
     grid-template-columns: 1fr;
     grid-gap: 1px;
