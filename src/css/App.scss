@@ -1,7 +1,7 @@
 $gutter-sm: 1rem;
 $gutter-md: 1.5rem;
 $gutter-lg: 2rem;
-
+$brand: #e91e63;
 $bg: #eee;
 
 html {
@@ -18,11 +18,13 @@ html {
 }
 
 body {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   // font-family: system-ui,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
   //   Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  font-family: 'Courier New', Courier, 'Lucida Sans Typewriter',
-    'Lucida Typewriter', monospace;
+  // font-family: 'Courier New', Courier, 'Lucida Sans Typewriter',
+  //   'Lucida Typewriter', monospace;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
   //  min-height: 100vh;
   //font-family: sans-serif;
   background: $bg;
@@ -35,12 +37,15 @@ h4,
 h5,
 h6,
 p {
-  margin: 0 0 0.5em;
+  margin: 0 0 1em;
 }
 
 // .hidden {
 //   display: none !important;
 // }
+a {
+  color: $brand;
+}
 label {
   font-weight: bold;
 }
@@ -64,6 +69,9 @@ label {
 }
 .text-sm {
   font-size: 1.2rem;
+}
+.text-huge {
+  font-size: 3rem;
 }
 .ml-1 {
   margin-left: 1rem;
@@ -102,8 +110,10 @@ label {
   justify-content: space-between;
 }
 .btn {
-  font-family: 'Courier New', Courier, 'Lucida Sans Typewriter',
-    'Lucida Typewriter', monospace;
+  // font-family: 'Courier New', Courier, 'Lucida Sans Typewriter',
+  // 'Lucida Typewriter', monospace;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem;
   outline: none;
   background: $bg;
   color: #444;
@@ -229,6 +239,9 @@ textarea {
   > div {
     margin-top: $gutter-sm;
   }
+  label {
+    font-size: 1.4rem;
+  }
 }
 .list-btns {
   display: flex;
@@ -253,6 +266,7 @@ textarea {
   grid-gap: $gutter-sm;
 }
 .album-list-item a {
+  font-size: 1.4rem;
   text-decoration: none;
   color: #333;
   background: #fff;
@@ -272,7 +286,7 @@ textarea {
   line-height: 1.8rem;
   padding: 0 1.5rem;
   > div {
-    margin: 0.25rem 0;
+    margin: 0.25rem 0.5rem 0 0;
   }
 }
 .item-artist {
@@ -348,14 +362,19 @@ textarea {
 }
 .card-title {
   border-bottom: 1px solid #eee;
-  padding-bottom: 1rem;
+  padding-bottom: $gutter-md;
+  margin-bottom: $gutter-md;
 }
 .add-form {
   padding-top: $gutter-md;
 }
-
 .main-detail {
   margin-top: -$gutter-md;
+}
+
+.get-out {
+  width: 100%;
+  grid-column: 1 / -1;
 }
 
 .stars {
@@ -427,6 +446,7 @@ footer {
   color: #888;
   padding: 3rem 0;
   text-align: center;
+  line-height: 1.5;
 }
 
 /* responsive helpers */

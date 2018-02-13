@@ -1,14 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-//import ScrollToTopOnMount from './ScrollToTopOnMount';
-
 import base, { auth, provider } from '../firebase';
 
 import Header from './Header';
 import AlbumList from './AlbumList';
 import Detail from './Detail';
 import AddEditItem from './AddEditItem';
+import About from './About';
 
 import 'normalize.css';
 import '../css/fontello.css';
@@ -20,6 +19,7 @@ class App extends Component {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.saveItem = this.saveItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
 
     this.state = {
       items: {},
@@ -53,10 +53,8 @@ class App extends Component {
   }
 
   saveItem = item => {
-    if (!this.state.itMe) {
-      alert('How did you even get here? Only Liam may edit Der Katalog.');
-      return false;
-    }
+    //TODO: maybe add some feedback for react-devtools hackers that they can't save,
+    //because they need to be authed as ME with google.
 
     const items = { ...this.state.items };
     const timestamp = Date.now();
@@ -72,16 +70,17 @@ class App extends Component {
     this.setState({ items });
   };
 
+  deleteItem = item => {
+    const items = { ...this.state.items };
+    items[item] = null;
+    this.setState({ items });
+    //TODO: also delete corresponding artwork in Cloudinary
+  };
+
   componentDidMount() {
     base.syncState(`items`, {
       context: this,
       state: 'items'
-      //WAIT!!! this sorted it but also seemed to duplicate my database when i saved one :((((
-      //Be sure to comment the setState in the save function while testing this.
-      // asArray: true, -CAUTION-
-      // queries: {-CAUTION-
-      //   orderByChild: 'artist'-CAUTION-
-      // }-CAUTION-
     });
 
     auth.onAuthStateChanged(user => {
@@ -90,26 +89,6 @@ class App extends Component {
       }
     });
   }
-
-  // componentWillUnmount() {
-  //   base.removeBinding(this.ref);
-  // }
-
-  //MOVED TO HELPERS FILE. But could not use JSX, so had to dangerouslySetInnerHtml on it :/
-  // renderStars(rating) {
-  //   let str = [];
-  //   const whole = Math.floor(rating);
-  //
-  //   Array.from(Array(whole), (_, i) => {
-  //     return str.push(<i className="icon-star" key={i} />);
-  //   });
-  //
-  //   if (!Number.isInteger(rating)) {
-  //     str.push(<i className="icon-star-half" key={rating} />);
-  //   }
-  //
-  //   return str;
-  // }
 
   render() {
     return (
@@ -134,22 +113,31 @@ class App extends Component {
               render={props => <Detail itMe={this.state.itMe} {...props} />}
             />
 
-            {this.state.itMe && (
-              <Route
-                exact
-                path="/add"
-                render={props => (
-                  <AddEditItem mode="add" saveItem={this.saveItem} />
-                )}
-              />
-            )}
+            <Route
+              exact
+              path="/add"
+              render={props => (
+                <AddEditItem
+                  mode="add"
+                  saveItem={this.saveItem}
+                  itMe={this.state.itMe}
+                />
+              )}
+            />
 
             <Route
               path="/edit/:id"
               render={props => (
-                <AddEditItem mode="edit" saveItem={this.saveItem} />
+                <AddEditItem
+                  mode="edit"
+                  saveItem={this.saveItem}
+                  deleteItem={this.deleteItem}
+                  itMe={this.state.itMe}
+                />
               )}
             />
+
+            <Route path="/about" component={About} />
           </div>
         </Fragment>
       </Router>

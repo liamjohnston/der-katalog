@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Image, CloudinaryContext, Transformation } from 'cloudinary-react';
 import { renderStars } from '../helpers';
@@ -53,6 +53,18 @@ class Detail extends Component {
           <div className="card detail-card main-detail">
             <h3 className="card-title center">
               {details.artist}, {details.title}
+              {details.rating <= 0 ? (
+                <div className="muted text-sm fw-normal mt-1">
+                  Not rated yet
+                </div>
+              ) : (
+                <div
+                  className="stars card-value text-huge mt-1"
+                  dangerouslySetInnerHTML={{
+                    __html: renderStars(details.rating)
+                  }}
+                />
+              )}
             </h3>
             <label className="card-label">Year:</label>
             <div className="detail-year card-value">{details.year}</div>
@@ -89,24 +101,14 @@ class Detail extends Component {
                 )}
               </div>
             </div>
-          </div>
-          <div className="card detail-card extra-detail">
-            <h3 className="card-title center">My notes</h3>
-            <label className="card-label">Rating:</label>
-            {details.rating <= 0 ? (
-              <span className="muted">Not rated yet</span>
+            {details.notes ? (
+              <Fragment>
+                <label className="card-label">Notes:</label>
+                <div className="detail-notes card-value">{details.notes}</div>
+              </Fragment>
             ) : (
-              <div
-                className="stars card-value"
-                dangerouslySetInnerHTML={{
-                  __html: renderStars(details.rating)
-                }}
-              />
+              ''
             )}
-            <label className="card-label">Notes:</label>
-            <div className="detail-year card-value">
-              {details.notes || <span className="muted">No notes</span>}
-            </div>
           </div>
 
           {this.props.itMe ? (

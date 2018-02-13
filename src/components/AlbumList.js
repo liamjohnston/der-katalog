@@ -192,7 +192,9 @@ class List extends Component {
             <span role="img" aria-label="react emoji">
               ⚛️
             </span>{' '}
-            by <a href="http://liam.nz">Liam</a>
+            by <a href="http://liam.nz">Liam</a>.
+            <br />
+            <Link to="/about">About this site</Link>
           </footer>
         </Fragment>
       );

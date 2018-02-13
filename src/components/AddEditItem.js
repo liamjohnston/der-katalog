@@ -8,12 +8,14 @@ import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
 
 import ScrollToTopOnMount from './ScrollToTopOnMount';
+import AccessDenied from './AccessDenied';
 
 class AddEditItem extends Component {
   constructor(props, context) {
     super(props, context);
 
     this.handleSaveItem = this.handleSaveItem.bind(this);
+    this.handleDeleteItem = this.handleDeleteItem.bind(this);
     this.fetchDetails = this.fetchDetails.bind(this);
     this.handleRatingChange = this.handleRatingChange.bind(this);
     this.handleMediaConditionChange = this.handleMediaConditionChange.bind(
@@ -31,7 +33,8 @@ class AddEditItem extends Component {
     };
   }
 
-  //TODO: generic slider handler instead of 3x functions.
+  //TODO: A better solution than having 3x functions!
+  //Possibly can redo with native range inputs.
   //Am having trouble passing a second arg in the onChange event.
 
   handleRatingChange = value => {
@@ -147,6 +150,18 @@ class AddEditItem extends Component {
     //  this.addForm.reset();
   }
 
+  handleDeleteItem() {
+    this.setState(
+      {
+        saving: true //TODO: Change this line
+      },
+      () => {
+        this.props.deleteItem(this.state.itemId);
+        this.props.history.push('/');
+      }
+    );
+  }
+
   componentWillMount() {
     if (this.state.mode === 'edit') {
       this.fetchDetails();
@@ -158,6 +173,8 @@ class AddEditItem extends Component {
   render() {
     if (this.state.loading) {
       return <div className="loader" />;
+    } else if (!this.props.itMe) {
+      return <AccessDenied />;
     } else {
       const details = this.state.details;
 
@@ -365,7 +382,7 @@ class AddEditItem extends Component {
               }}
             />
           </div>
-          {this.state.saving === false ? (
+          {!this.state.saving ? (
             <button type="submit" className="btn btn-success js-center">
               {this.state.mode === 'add' ? 'Add to katalog' : 'Save changes'}
             </button>
@@ -377,6 +394,21 @@ class AddEditItem extends Component {
             >
               Saving...
             </button>
+          )}
+          {this.state.mode === 'edit' && !this.state.saving ? (
+            <button
+              type="button"
+              className="btn btn-sm js-center mt-2"
+              onClick={() => {
+                if (window.confirm('Really? Ya sure?')) {
+                  this.handleDeleteItem();
+                }
+              }}
+            >
+              Delete
+            </button>
+          ) : (
+            ''
           )}
         </form>
       );
