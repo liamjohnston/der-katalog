@@ -19,6 +19,9 @@ const About = () => {
           where's the fun in that? I like sifting through second-hand record
           stores.
         </p>
+        <p>
+          <Link to="/">Back to Der Katalog</Link>
+        </p>
       </div>
     </div>
   );

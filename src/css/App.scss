@@ -263,7 +263,8 @@ textarea {
   padding: 0 $gutter-sm $gutter-lg;
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: $gutter-sm;
+  //grid-gap: $gutter-sm;
+  grid-gap: 5px;
 }
 .album-list-item a {
   font-size: 1.4rem;
@@ -271,11 +272,11 @@ textarea {
   color: #333;
   background: #fff;
   display: grid;
-  grid-template-columns: 12rem 1fr;
+  grid-template-columns: 10rem 1fr;
 }
 .item-thumb {
-  width: 12rem;
-  height: 12rem;
+  width: 10rem;
+  height: 10rem;
   background: url(../img/artwork-placeholder.png) no-repeat center;
   img {
     width: 100%;
@@ -285,12 +286,21 @@ textarea {
   align-self: center;
   line-height: 1.8rem;
   padding: 0 1.5rem;
-  > div {
+  div {
     margin: 0.25rem 0.5rem 0 0;
   }
+  .item-artist {
+    font-weight: bold;
+    margin-right: 0;
+  }
+  .item-artist,
+  .item-title {
+    display: inline;
+  }
 }
-.item-artist {
-  font-weight: bold;
+
+.item-title::before {
+  content: ' - ';
 }
 
 .album-list-item-placeholder {
@@ -355,7 +365,7 @@ textarea {
   margin-bottom: $gutter-lg;
   display: grid;
   grid-template-columns: 2fr 4fr;
-  grid-gap: 1rem;
+  grid-gap: 1.5rem;
   .card-title {
     grid-column: 1 / -1;
   }
@@ -530,13 +540,26 @@ footer {
     grid-gap: $gutter-md;
   }
 
-  // .album-list-item a {
-  //   grid-template-columns: 12rem 1fr;
-  // }
-  // .item-thumb {
-  //   width: 12rem;
-  //   height: 12rem;
-  // }
+  .item-details {
+    .item-artist,
+    .item-title {
+      display: block;
+    }
+    .item-artist {
+      margin-right: 0.5rem;
+    }
+    .item-title::before {
+      content: '';
+    }
+  }
+
+  .album-list-item a {
+    grid-template-columns: 12rem 1fr;
+  }
+  .item-thumb {
+    width: 12rem;
+    height: 12rem;
+  }
 
   .list-mode {
     grid-template-columns: 1fr;

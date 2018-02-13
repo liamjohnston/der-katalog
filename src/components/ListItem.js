@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { renderStars } from '../helpers';
 
@@ -29,13 +29,9 @@ class ListItem extends Component {
           <div className="item-details">
             <div className="item-artist">{itemDetails.artist}</div>
             <div className="item-title">{itemDetails.title}</div>
-            <div className="item-meta">
-              <span className="item-year">{itemDetails.year}</span> &middot;{' '}
-              <span className="item-format">{itemDetails.format}</span>
-            </div>
             {itemDetails.rating ? (
               <div
-                className="stars"
+                className="stars nowrap"
                 dangerouslySetInnerHTML={{
                   __html: renderStars(itemDetails.rating)
                 }}
@@ -43,6 +39,18 @@ class ListItem extends Component {
             ) : (
               <div className="muted text-sm nowrap">Not rated yet</div>
             )}
+            <div className="item-meta nowrap">
+              <span className="item-year">{itemDetails.year}</span>
+              {itemDetails.format !== 'Album' ? (
+                <Fragment>
+                  {' '}
+                  &middot;{' '}
+                  <span className="item-format">{itemDetails.format}</span>
+                </Fragment>
+              ) : (
+                ''
+              )}
+            </div>
           </div>
         </Link>
       </li>

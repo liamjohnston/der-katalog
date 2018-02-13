@@ -14,9 +14,7 @@ class List extends Component {
   constructor() {
     super();
 
-    this.changeViewMode = this.changeViewMode.bind(this);
-    this.changeSortMode = this.changeSortMode.bind(this);
-    this.changeFilterMode = this.changeFilterMode.bind(this);
+    this.changeListOption = this.changeListOption.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
 
     this.state = {
@@ -27,22 +25,19 @@ class List extends Component {
     };
   }
 
-  changeViewMode(mode) {
-    this.setState({
-      viewMode: mode
-    });
+  scrollTop() {
+    window.scrollTo(0, 0);
   }
 
-  changeSortMode(mode) {
-    this.setState({
-      sortBy: mode
-    });
-  }
-
-  changeFilterMode(mode) {
-    this.setState({
-      filter: mode
-    });
+  changeListOption(option, mode) {
+    this.setState(
+      {
+        [option]: mode
+      },
+      () => {
+        this.scrollTop();
+      }
+    );
   }
 
   handleSearch(event) {
@@ -81,12 +76,12 @@ class List extends Component {
 
             <SortOptions
               sortBy={this.state.sortBy}
-              changeSortMode={this.changeSortMode}
+              changeListOption={this.changeListOption}
             />
 
             <FormatFilter
               filter={this.state.filter}
-              changeFilterMode={this.changeFilterMode}
+              changeListOption={this.changeListOption}
             />
 
             <div className="list-btns al-self-flex-end">
@@ -95,7 +90,7 @@ class List extends Component {
                   className={`btn ${
                     this.state.viewMode === 'grid' ? 'active' : ''
                   }`}
-                  onClick={() => this.changeViewMode('grid')}
+                  onClick={() => this.changeListOption('viewMode', 'grid')}
                 >
                   <i className="icon icon-th-large" />
                 </button>
@@ -103,7 +98,7 @@ class List extends Component {
                   className={`btn ${
                     this.state.viewMode === 'list' ? 'active' : ''
                   }`}
-                  onClick={() => this.changeViewMode('list')}
+                  onClick={() => this.changeListOption('viewMode', 'list')}
                 >
                   <i className="icon icon-list" />
                 </button>

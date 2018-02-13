@@ -52,7 +52,7 @@ class Detail extends Component {
 
           <div className="card detail-card main-detail">
             <h3 className="card-title center">
-              {details.artist}, {details.title}
+              {details.artist} - {details.title}
               {details.rating <= 0 ? (
                 <div className="muted text-sm fw-normal mt-1">
                   Not rated yet
@@ -103,7 +103,7 @@ class Detail extends Component {
             </div>
             {details.notes ? (
               <Fragment>
-                <label className="card-label">Notes:</label>
+                <label className="card-label align-self-start">Notes:</label>
                 <div className="detail-notes card-value">{details.notes}</div>
               </Fragment>
             ) : (
@@ -114,7 +114,7 @@ class Detail extends Component {
           {this.props.itMe ? (
             <Link
               to={`/edit/${details.id}`}
-              className="btn btn-primary js-center"
+              className="btn btn-primary js-center mb-2"
             >
               Edit details
             </Link>
