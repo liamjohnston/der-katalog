@@ -74,7 +74,7 @@ class App extends Component {
     const items = { ...this.state.items };
     items[item] = null;
     this.setState({ items });
-    //TODO: also delete corresponding artwork in Cloudinary
+    //TODO: also delete corresponding artwork in Cloudinary... but also, no biggie not to
   };
 
   componentDidMount() {
@@ -104,7 +104,12 @@ class App extends Component {
               exact
               path="/"
               render={props => (
-                <AlbumList items={this.state.items} itMe={this.state.itMe} />
+                <AlbumList
+                  items={this.state.items}
+                  itMe={this.state.itMe}
+                  query={this.props.options.query}
+                  {...this.props}
+                />
               )}
             />
 

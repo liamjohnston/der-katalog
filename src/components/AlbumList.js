@@ -1,28 +1,19 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import LazyLoad, { forceCheck } from 'react-lazyload';
-
-//import { DebounceInput } from 'react-debounce-input';
 
 import ListItem from './ListItem';
 import Placeholder from './Placeholder';
 import SearchBox from './ListOptions/SearchBox';
 import FormatFilter from './ListOptions/FormatFilter';
 import SortOptions from './ListOptions/SortOptions';
+import ViewMode from './ListOptions/ViewMode';
+import Footer from './Footer';
 
 class List extends Component {
   constructor() {
     super();
-
     this.changeListOption = this.changeListOption.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-
-    this.state = {
-      viewMode: 'grid',
-      query: '',
-      sortBy: 'artist',
-      filter: 'all'
-    };
   }
 
   scrollTop() {
@@ -30,19 +21,22 @@ class List extends Component {
   }
 
   changeListOption(option, mode) {
-    this.setState(
-      {
-        [option]: mode
-      },
-      () => {
-        this.scrollTop();
-      }
-    );
+    //yuck...
+    if (option === 'viewMode') {
+      this.props.viewMode(mode);
+    } else if (option === 'sortBy') {
+      this.props.sortItems(mode);
+    } else if (option === 'filter') {
+      this.props.filterItems(mode);
+    }
+
+    this.scrollTop();
   }
 
   handleSearch(event) {
     const val = event.target.value;
-    this.setState({ query: val });
+    this.props.searchItems(val);
+    this.scrollTop();
   }
 
   componentDidUpdate() {
@@ -55,88 +49,57 @@ class List extends Component {
     if (!Object.keys(this.props.items).length) {
       return <div className="loader" />;
     } else {
+      const { viewMode, query, sortBy, filter } = this.props.options;
       return (
         <Fragment>
           <div className="options-bar mt-2 mb-2">
             <div className="search-wrap">
               {/* TODO: debounce search */}
-              {/* <DebounceInput
-                className="form-field"
-                minLength={2}
-                debounceTimeout={300}
-                onChange={event => this.setState({ value: event.target.value })}
-              /> */}
-              {/* <p>Value: {this.state.query}</p> */}
-
-              <SearchBox
-                query={this.state.query}
-                handleSearch={this.handleSearch}
-              />
+              <SearchBox query={query} handleSearch={this.handleSearch} />
             </div>
 
             <SortOptions
-              sortBy={this.state.sortBy}
+              sortBy={sortBy}
               changeListOption={this.changeListOption}
             />
 
             <FormatFilter
-              filter={this.state.filter}
+              filter={filter}
               changeListOption={this.changeListOption}
             />
 
-            <div className="list-btns al-self-flex-end">
-              <div className="view-options split-btns hide-xs">
-                <button
-                  className={`btn ${
-                    this.state.viewMode === 'grid' ? 'active' : ''
-                  }`}
-                  onClick={() => this.changeListOption('viewMode', 'grid')}
-                >
-                  <i className="icon icon-th-large" />
-                </button>
-                <button
-                  className={`btn ${
-                    this.state.viewMode === 'list' ? 'active' : ''
-                  }`}
-                  onClick={() => this.changeListOption('viewMode', 'list')}
-                >
-                  <i className="icon icon-list" />
-                </button>
-              </div>
-              {this.props.itMe ? (
-                <Link to="/add" className="btn btn-success ml-1">
-                  Add
-                </Link>
-              ) : (
-                ''
-              )}
-            </div>
+            <ViewMode
+              viewMode={viewMode}
+              changeListOption={this.changeListOption}
+              itMe={this.props.itMe}
+            />
           </div>
-          <ul className={`album-list ${this.state.viewMode}-mode`}>
+          <ul className={`album-list ${viewMode}-mode`}>
+            {/* sweet jesus here we go */}
             {Object.keys(this.props.items)
               .filter(item => {
                 const thisOne = this.props.items[item];
                 //return everything if insufficient search length
-                if (this.state.query.length < 3) {
+                if (query.length < 2) {
                   return thisOne;
                 } else {
                   if (
                     thisOne.artist
                       .toLowerCase()
-                      .includes(this.state.query.toLowerCase()) ||
-                    thisOne.title
-                      .toLowerCase()
-                      .includes(this.state.query.toLowerCase())
+                      .includes(query.toLowerCase()) ||
+                    thisOne.title.toLowerCase().includes(query.toLowerCase())
                   ) {
                     return thisOne;
                   }
+                  return false;
                 }
+                // TODO: show 'No results for x' message
               })
               .filter(item => {
                 const thisOne = this.props.items[item];
-                if (this.state.filter === 'albums') {
+                if (filter === 'albums') {
                   return thisOne.format === 'Album' ? thisOne : false;
-                } else if (this.state.filter === 'singles') {
+                } else if (filter === 'singles') {
                   return thisOne.format === 'Single' || thisOne.format === 'EP'
                     ? thisOne
                     : false;
@@ -148,9 +111,9 @@ class List extends Component {
                 const itemA = this.props.items[a];
                 const itemB = this.props.items[b];
 
-                if (this.state.sortBy === 'year') {
+                if (sortBy === 'year') {
                   return itemA.year < itemB.year ? -1 : 1;
-                } else if (this.state.sortBy === 'rating') {
+                } else if (sortBy === 'rating') {
                   return itemA.rating < itemB.rating ? 1 : -1;
                 } else {
                   const aSort = itemA.sortUnder
@@ -173,24 +136,12 @@ class List extends Component {
                     key={key}
                     details={this.props.items[key]}
                     renderStars={this.props.renderStars}
-                    viewMode={this.state.viewMode}
+                    viewMode={viewMode}
                   />
                 </LazyLoad>
               ))}
           </ul>
-          <footer>
-            Made with{' '}
-            <span role="img" aria-label="heart emoji">
-              ❤️
-            </span>{' '}
-            &{' '}
-            <span role="img" aria-label="react emoji">
-              ⚛️
-            </span>{' '}
-            by <a href="http://liam.nz">Liam</a>.
-            <br />
-            <Link to="/about">About this site</Link>
-          </footer>
+          <Footer />
         </Fragment>
       );
     }

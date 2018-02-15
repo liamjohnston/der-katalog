@@ -11,8 +11,8 @@ import ScrollToTopOnMount from './ScrollToTopOnMount';
 import AccessDenied from './AccessDenied';
 
 class AddEditItem extends Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
 
     this.handleSaveItem = this.handleSaveItem.bind(this);
     this.handleDeleteItem = this.handleDeleteItem.bind(this);
@@ -113,8 +113,6 @@ class AddEditItem extends Component {
             details: deets
           });
         }
-
-        //    console.log(result);
       }
     );
   }
@@ -146,14 +144,12 @@ class AddEditItem extends Component {
         this.props.history.push('/');
       }
     );
-
-    //  this.addForm.reset();
   }
 
   handleDeleteItem() {
     this.setState(
       {
-        saving: true //TODO: Change this line
+        saving: true //TODO: Change this line slash get it working
       },
       () => {
         this.props.deleteItem(this.state.itemId);

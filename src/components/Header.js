@@ -33,13 +33,16 @@ class Header extends Component {
           </div>
           {this.props.itMe ? (
             <button
-              className="header-auth-link btn"
+              className="header-auth-link btn btn-sm"
               onClick={this.props.logout}
             >
               Log out
             </button>
           ) : (
-            <button className="header-auth-link btn" onClick={this.props.login}>
+            <button
+              className="header-auth-link btn btn-sm"
+              onClick={this.props.login}
+            >
               Log in
             </button>
           )}

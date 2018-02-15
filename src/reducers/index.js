@@ -1,12 +1,11 @@
-//COPIED FROM REACT BLOG EXAMPLE
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
-// import { combineReducers } from 'redux';
-// import { reducer as formReducer } from 'redux-form';
-// import PostsReducer from './reducer_posts';
-//
-// const rootReducer = combineReducers({
-//   posts: PostsReducer,
-//   form: formReducer
-// });
-//
-// export default rootReducer;
+import options from './options_reducer';
+
+const rootReducer = combineReducers({
+  options,
+  routing: routerReducer
+});
+
+export default rootReducer;
