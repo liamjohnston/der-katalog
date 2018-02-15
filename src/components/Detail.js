@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import { Image, CloudinaryContext, Transformation } from 'cloudinary-react';
 import { renderStars } from '../helpers';
 import base from '../firebase';
@@ -126,5 +128,14 @@ class Detail extends Component {
     }
   }
 }
+
+Detail.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string
+    })
+  }),
+  itMe: PropTypes.bool
+};
 
 export default Detail;

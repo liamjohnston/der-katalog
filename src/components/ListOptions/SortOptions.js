@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class SortOptions extends Component {
   render() {
@@ -29,5 +30,10 @@ class SortOptions extends Component {
     );
   }
 }
+
+SortOptions.propTypes = {
+  changeListOption: PropTypes.func,
+  sortBy: PropTypes.string
+};
 
 export default SortOptions;

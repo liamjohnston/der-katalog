@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Header extends Component {
   render() {
@@ -51,5 +52,11 @@ class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  login: PropTypes.func,
+  logout: PropTypes.func,
+  itMe: PropTypes.bool
+};
 
 export default Header;

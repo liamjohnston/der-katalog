@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class FormatFilter extends Component {
   render() {
@@ -30,5 +31,10 @@ class FormatFilter extends Component {
     );
   }
 }
+
+FormatFilter.propTypes = {
+  changeListOption: PropTypes.func,
+  filter: PropTypes.string
+};
 
 export default FormatFilter;

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import base, { auth, provider } from '../firebase';
 
@@ -149,5 +150,11 @@ class App extends Component {
     );
   }
 }
+App.propTypes = {
+  //  options: PropTypes.object
+  options: PropTypes.shape({
+    query: PropTypes.string
+  })
+};
 
 export default App;

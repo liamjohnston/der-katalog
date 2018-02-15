@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
+
 import { Image, CloudinaryContext, Transformation } from 'cloudinary-react';
 
 import base from '../firebase';
@@ -73,7 +75,7 @@ class AddEditItem extends Component {
   }
 
   fetchDetails() {
-    console.log('Fetching details of existing item...');
+    //  console.log('Fetching details of existing item...');
     base.bindToState(`items/${this.state.itemId}`, {
       context: this,
       state: 'details',
@@ -411,5 +413,20 @@ class AddEditItem extends Component {
     }
   }
 }
+
+AddEditItem.propTypes = {
+  mode: PropTypes.string,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string
+    })
+  }),
+  saveItem: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }),
+  deleteItem: PropTypes.func,
+  itMe: PropTypes.bool
+};
 
 export default withRouter(AddEditItem);

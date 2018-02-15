@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import { renderStars } from '../helpers';
 
 const IMG_PATH = '//res.cloudinary.com/diouve9dy/image/upload/';
@@ -57,5 +59,10 @@ class ListItem extends Component {
     );
   }
 }
+
+ListItem.propTypes = {
+  details: PropTypes.object,
+  viewMode: PropTypes.string
+};
 
 export default ListItem;

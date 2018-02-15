@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import LazyLoad, { forceCheck } from 'react-lazyload';
+import PropTypes from 'prop-types';
 
 import ListItem from './ListItem';
 import Placeholder from './Placeholder';
@@ -9,7 +10,7 @@ import SortOptions from './ListOptions/SortOptions';
 import ViewMode from './ListOptions/ViewMode';
 import Footer from './Footer';
 
-class List extends Component {
+class AlbumList extends Component {
   constructor() {
     super();
     this.changeListOption = this.changeListOption.bind(this);
@@ -148,4 +149,15 @@ class List extends Component {
   }
 }
 
-export default List;
+AlbumList.propTypes = {
+  viewMode: PropTypes.func,
+  sortItems: PropTypes.func,
+  filterItems: PropTypes.func,
+  searchItems: PropTypes.func,
+  items: PropTypes.object,
+  options: PropTypes.object,
+  itMe: PropTypes.bool,
+  renderStars: PropTypes.func
+};
+
+export default AlbumList;
