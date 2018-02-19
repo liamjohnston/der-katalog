@@ -8,20 +8,53 @@ class SortOptions extends Component {
         <label>Sort by</label>
         <div className="sort-options split-btns mt-xs">
           <button
-            className={`btn ${this.props.sortBy === 'artist' ? 'active' : ''}`}
-            onClick={() => this.props.changeListOption('sortBy', 'artist')}
+            className={`btn ${
+              this.props.sortBy.sortBy === 'artist' ? 'active' : ''
+            } sort_${this.props.sortBy.ascDesc}`}
+            onClick={() =>
+              this.props.changeListOption('sortBy', {
+                sortBy: 'artist',
+                ascDesc:
+                  this.props.sortBy.sortBy === 'artist' &&
+                  this.props.sortBy.ascDesc === 'asc'
+                    ? 'desc'
+                    : 'asc'
+              })
+            }
           >
             <i className="icon icon-sort-alphabet" />
           </button>
           <button
-            className={`btn ${this.props.sortBy === 'year' ? 'active' : ''}`}
-            onClick={() => this.props.changeListOption('sortBy', 'year')}
+            className={`btn ${
+              this.props.sortBy.sortBy === 'year' ? 'active' : ''
+            } sort_${this.props.sortBy.ascDesc}`}
+            onClick={() =>
+              this.props.changeListOption('sortBy', {
+                sortBy: 'year',
+                ascDesc:
+                  this.props.sortBy.sortBy === 'year' &&
+                  this.props.sortBy.ascDesc === 'asc'
+                    ? 'desc'
+                    : 'asc'
+              })
+            }
           >
             <i className="icon icon-calendar" />
           </button>
           <button
-            className={`btn ${this.props.sortBy === 'rating' ? 'active' : ''}`}
-            onClick={() => this.props.changeListOption('sortBy', 'rating')}
+            className={`btn ${
+              this.props.sortBy.sortBy === 'rating' ? 'active' : ''
+            } sort_${this.props.sortBy.ascDesc}`}
+            onClick={() =>
+              this.props.changeListOption('sortBy', {
+                sortBy: 'rating',
+                ascDesc:
+                  this.props.sortBy.sortBy === 'rating' &&
+                  this.props.sortBy.ascDesc === 'asc'
+                    ? 'desc'
+                    : 'asc'
+              })
+            }
           >
             <i className="icon icon-star" />
           </button>
@@ -33,7 +66,11 @@ class SortOptions extends Component {
 
 SortOptions.propTypes = {
   changeListOption: PropTypes.func,
-  sortBy: PropTypes.string
+  //sortBy: PropTypes.string
+  sortBy: PropTypes.shape({
+    sortBy: PropTypes.string,
+    ascDesc: PropTypes.string
+  })
 };
 
 export default SortOptions;

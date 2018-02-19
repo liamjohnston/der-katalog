@@ -1,3 +1,8 @@
+export function resetSettings() {
+  return {
+    type: 'RESET_SETTINGS'
+  };
+}
 export function searchItems(query) {
   return {
     type: 'SEARCH_ITEMS',
@@ -7,7 +12,10 @@ export function searchItems(query) {
 export function sortItems(sortBy) {
   return {
     type: 'SORT_ITEMS',
-    sortBy
+    sortBy: {
+      sortBy: sortBy.sortBy,
+      ascDesc: sortBy.ascDesc
+    }
   };
 }
 export function filterItems(filter) {

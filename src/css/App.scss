@@ -19,12 +19,8 @@ html {
 
 body {
   font-size: 1.6rem;
-  // font-family: system-ui,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
-  //   Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
-  //  min-height: 100vh;
-  //font-family: sans-serif;
   background: $bg;
 }
 
@@ -111,7 +107,6 @@ label {
   background: $bg;
   color: #444;
   border: 1px solid #ccc;
-  //  border-radius: 4px;
   height: 3.5rem;
   line-height: 3.5rem;
   padding: 0 1rem;
@@ -122,13 +117,6 @@ label {
   border: transparent;
   cursor: pointer;
   text-align: center;
-  // &:hover {
-  //   background: linear-gradient(
-  //     transparent,
-  //     rgba(0, 0, 0, 0.05) 40%,
-  //     rgba(0, 0, 0, 0.1)
-  //   );
-  // }
 }
 .btn-sm {
   font-size: 1.2rem;
@@ -136,20 +124,6 @@ label {
   line-height: 2.5rem;
   padding: 0 0.8rem;
 }
-// .split-btn {
-//   .btn {
-//     border: 1px solid #ccc;
-//     margin-left: -1px;
-//     border-radius: 0;
-//     &:first-of-type {
-//       margin-left: 0;
-//       border-radius: 4px 0 0 4px;
-//     }
-//     &:last-of-type {
-//       border-radius: 0 4px 4px 0;
-//     }
-//   }
-// }
 .btn-primary {
   background: rgb(66, 184, 221);
   color: #fff;
@@ -190,7 +164,6 @@ textarea {
   min-height: 100vh;
   margin: 0 auto;
   display: grid;
-  //grid-template-columns: auto 1fr auto;
   grid-template-columns: 1fr;
 }
 .main-header,
@@ -236,16 +209,11 @@ textarea {
     font-size: 1.4rem;
   }
 }
+
 .list-btns {
   display: flex;
 }
 .filter-options {
-  // .icon {
-  //   font-size: 1.2em;
-  // }
-  // .icon-cd-1 {
-  //      font-size: 1.2em;
-  // }
   .icon-cd-2 {
     font-size: 0.7em;
   }
@@ -256,7 +224,6 @@ textarea {
   padding: 0 $gutter-sm $gutter-lg;
   display: grid;
   grid-template-columns: 1fr;
-  //grid-gap: $gutter-sm;
   grid-gap: 3px;
 }
 .album-list-item a {
@@ -331,8 +298,6 @@ textarea {
     grid-column: 2 / -2;
   }
   .detail-image {
-    //width: 100%;
-    // padding-top: 100%;
     grid-column: 1 / -1;
     grid-row: 1;
     position: relative;
@@ -348,8 +313,6 @@ textarea {
 
 .card {
   background: #fff;
-  // border-radius: 4px;
-  // box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
   padding: 1.5rem;
 }
 .detail-card {
@@ -383,24 +346,18 @@ textarea {
 .stars {
   color: #ffc107;
 }
-.icon-star-half {
-  //  margin-left: -0.4rem; /* not happy about this */
-}
 
 .split-btns {
   .btn {
     border: 1px solid #ccc;
-    //  background: #fff;
     margin-left: -1px;
-    //  border-radius: 0;
-
-    &:first-of-type {
-      margin-left: 0;
-      //    border-radius: 4px 0 0 4px;
-    }
-    &:last-of-type {
-      //  border-radius: 0 4px 4px 0;
-    }
+    // border-radius: 0;
+    // &:first-of-type {
+    //   border-radius: 4px 0 0 4px;
+    // }
+    // &:last-of-type {
+    //   border-radius: 0 4px 4px 0;
+    // }
     input[type='radio'],
     input[type='checkbox'] {
       opacity: 0;
@@ -409,6 +366,19 @@ textarea {
   }
   .active {
     background: #fff;
+    &.sort_asc,
+    &.sort_desc {
+      &::after {
+        font-family: 'fontello';
+        content: '\e809';
+        margin-left: 0.5rem;
+        font-size: 1rem;
+        vertical-align: top;
+      }
+    }
+    &.sort_asc::after {
+      content: '\e806';
+    }
   }
   &.split-3 {
     display: grid;
@@ -519,6 +489,11 @@ footer {
 }
 
 /* FONTELLO overrides */
+[class^='icon-']:before,
+[class*=' icon-']:before {
+  margin-left: 0;
+  margin-right: 0;
+}
 .icon-star-half:before {
   content: '\e801';
   text-align: left; /* not ideal */

@@ -9,7 +9,7 @@ class SearchBox extends Component {
         <input
           id="search"
           className="form-field mt-xs"
-          defaultValue={this.props.query}
+          value={this.props.query}
           onChange={this.props.handleSearch}
           placeholder="Artist or album"
         />

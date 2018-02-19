@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 
-const About = () => {
+const About = props => {
   return (
     <div className="detail-wrap">
       <ScrollToTopOnMount />
@@ -20,7 +20,9 @@ const About = () => {
           stores.
         </p>
         <p>
-          <Link to="/">Back to Der Katalog</Link>
+          <Link to="/" onClick={props.resetSettings}>
+            Back to Der Katalog
+          </Link>
         </p>
       </div>
     </div>

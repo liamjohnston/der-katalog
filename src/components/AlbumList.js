@@ -21,14 +21,14 @@ class AlbumList extends Component {
     window.scrollTo(0, 0);
   }
 
-  changeListOption(option, mode) {
+  changeListOption(option, settings) {
     //yuck...
     if (option === 'viewMode') {
-      this.props.viewMode(mode);
+      this.props.viewMode(settings);
     } else if (option === 'sortBy') {
-      this.props.sortItems(mode);
+      this.props.sortItems(settings);
     } else if (option === 'filter') {
-      this.props.filterItems(mode);
+      this.props.filterItems(settings);
     }
 
     this.scrollTop();
@@ -50,6 +50,7 @@ class AlbumList extends Component {
     if (!Object.keys(this.props.items).length) {
       return <div className="loader" />;
     } else {
+      //  debugger;
       const { viewMode, query, sortBy, filter } = this.props.options;
       return (
         <Fragment>
@@ -112,10 +113,18 @@ class AlbumList extends Component {
                 const itemA = this.props.items[a];
                 const itemB = this.props.items[b];
 
-                if (sortBy === 'year') {
-                  return itemA.year < itemB.year ? -1 : 1;
-                } else if (sortBy === 'rating') {
-                  return itemA.rating < itemB.rating ? 1 : -1;
+                if (sortBy.sortBy === 'year') {
+                  if (sortBy.ascDesc === 'asc') {
+                    return itemA.year < itemB.year ? 1 : -1;
+                  } else {
+                    return itemA.year < itemB.year ? -1 : 1;
+                  }
+                } else if (sortBy.sortBy === 'rating') {
+                  if (sortBy.ascDesc === 'asc') {
+                    return itemA.rating < itemB.rating ? 1 : -1;
+                  } else {
+                    return itemA.rating < itemB.rating ? -1 : 1;
+                  }
                 } else {
                   const aSort = itemA.sortUnder
                     ? itemA.sortUnder
@@ -123,7 +132,11 @@ class AlbumList extends Component {
                   const bSort = itemB.sortUnder
                     ? itemB.sortUnder
                     : itemB.artist;
-                  return aSort.toLowerCase() < bSort.toLowerCase() ? -1 : 1;
+                  if (sortBy.ascDesc === 'asc') {
+                    return aSort.toLowerCase() < bSort.toLowerCase() ? -1 : 1;
+                  } else {
+                    return aSort.toLowerCase() < bSort.toLowerCase() ? 1 : -1;
+                  }
                 }
               })
               .map(key => (

@@ -8,7 +8,7 @@ class Header extends Component {
       <header className="main-header">
         <div className="title-bar">
           <div className="header-title">
-            <Link to="/">
+            <Link to="/" onClick={this.props.resetSettings}>
               <svg width="220px" viewBox="0 0 435 35">
                 <g
                   id="svgGroup"

@@ -99,6 +99,7 @@ class App extends Component {
             login={this.login}
             logout={this.logout}
             itMe={this.state.itMe}
+            {...this.props}
           />
           <div className="wrapper">
             <Route
