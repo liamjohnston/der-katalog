@@ -110,6 +110,7 @@ class AddEditItem extends Component {
         if (result && result[0].url) {
           const deets = { ...this.state.details };
           deets.artworkId = result[0].public_id;
+          deets.artworkColor = result[0].colors[0][0];
 
           this.setState({
             details: deets
@@ -137,6 +138,7 @@ class AddEditItem extends Component {
           format: this.format.value,
           notes: this.notes.value,
           artworkId: this.artworkId.value,
+          artworkColor: this.artworkColor.value,
           mediaCondition: parseFloat(this.mediaCondition.value),
           sleeveCondition: parseFloat(this.sleeveCondition.value),
           rating: parseFloat(this.rating.value)
@@ -345,6 +347,13 @@ class AddEditItem extends Component {
               defaultValue={details ? details.artworkId : ''}
               ref={input => {
                 this.artworkId = input;
+              }}
+            />
+            <input
+              type="hidden"
+              defaultValue={details ? details.artworkColor : ''}
+              ref={input => {
+                this.artworkColor = input;
               }}
             />
           </div>

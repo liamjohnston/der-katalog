@@ -2,11 +2,19 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+//uncomment if I end up with albums saved without a artworkColor (shouldn't happen tho)
+//have uninstaled huery for now.
+// import image from 'get-image-data';
+// import dominant from 'huey/dominant';
+
 import { Image, CloudinaryContext, Transformation } from 'cloudinary-react';
-import { renderStars } from '../helpers';
+import { renderStars, shadeBlend } from '../helpers';
 import base from '../firebase';
 
 import ScrollToTopOnMount from './ScrollToTopOnMount';
+
+//should not duplicate (see ListItem.js):
+//const IMG_PATH = '//res.cloudinary.com/diouve9dy/image/upload/';
 
 class Detail extends Component {
   constructor(props) {
@@ -15,14 +23,57 @@ class Detail extends Component {
     this.state = {
       details: {}
     };
+
+    this.setColor = this.setColor.bind(this);
+
+    //uncomment if I end up with albums saved without a artworkColor (shouldn't happen tho)
+    // this.setAndSaveColorIfImgButNoColor = this.setAndSaveColorIfImgButNoColor.bind(
+    //   this
+    // );
   }
+
+  setColor(color = '#eeeeee') {
+    document.body.style.background = `
+      linear-gradient(
+        ${color},
+        ${shadeBlend(0.3, color)}
+      )
+    `;
+  }
+
+  //uncomment if I end up with albums saved without a artworkColor (shouldn't happen tho)
+  //only called when existing image loads...
+  //...and only does stuff if there isn't a colour already saved:
+  // setAndSaveColorIfImgButNoColor() {
+  //   if (!this.state.details.artworkColor) {
+  //     image(`${IMG_PATH}${this.state.details.artworkId}`, (error, img) => {
+  //       const color = `rgb(${dominant(img.data)})`;
+  //
+  //       const deets = { ...this.state.details };
+  //       deets.artworkColor = color;
+  //
+  //       this.setState({
+  //         details: deets
+  //       });
+  //
+  //       console.log(`${this.state.details.title} color: ${deets.artworkColor}`);
+  //     });
+  //   }
+  // }
 
   componentDidMount() {
     const item = this.props.match.params.id;
+    //uncomment i f I end up with albums saved without a artworkColor (shouldn't happen tho)
+    //I.E. change bindToState to syncState
+    //base.syncState(`items/${item}`, {
     base.bindToState(`items/${item}`, {
       context: this,
       state: 'details'
     });
+  }
+
+  componentWillUnmount() {
+    document.body.style.removeProperty('background');
   }
 
   render() {
@@ -30,12 +81,15 @@ class Detail extends Component {
       return <div className="loader" />;
     } else {
       const details = this.state.details;
+      this.setColor(details.artworkColor);
       return (
         <div className="detail-wrap">
           <ScrollToTopOnMount />
 
           {details.artworkId ? (
             <CloudinaryContext cloudName="diouve9dy" className="detail-image">
+              {/* uncomment i f I end up with albums saved without a artworkColor (shouldn't happen tho) */}
+              {/* onLoad={this.setAndSaveColorIfImgButNoColor} */}
               <Image
                 publicId={details.artworkId}
                 alt={`Album cover for ${details.title}`}
