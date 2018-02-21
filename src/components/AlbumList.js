@@ -55,10 +55,7 @@ class AlbumList extends Component {
       return (
         <Fragment>
           <div className="options-bar mt-2 mb-2">
-            <div className="search-wrap">
-              {/* TODO: debounce search */}
-              <SearchBox query={query} handleSearch={this.handleSearch} />
-            </div>
+            <SearchBox query={query} handleSearch={this.handleSearch} />
 
             <SortOptions
               sortBy={sortBy}
@@ -76,8 +73,9 @@ class AlbumList extends Component {
               itMe={this.props.itMe}
             />
           </div>
+
           <ul className={`album-list ${viewMode}-mode`}>
-            {/* sweet jesus here we go */}
+            {/* sweet jesus */}
             {Object.keys(this.props.items)
               .filter(item => {
                 const thisOne = this.props.items[item];
@@ -95,7 +93,6 @@ class AlbumList extends Component {
                   }
                   return false;
                 }
-                // TODO: show 'No results for x' message
               })
               .filter(item => {
                 const thisOne = this.props.items[item];

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class SearchBox extends Component {
   render() {
     return (
-      <div>
+      <div className="search-wrap">
         <label>Search</label>
         <input
           id="search"
