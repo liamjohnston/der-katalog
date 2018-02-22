@@ -15,7 +15,7 @@ class ListItem extends Component {
         <Link to={`/detail/${itemDetails.id}`}>
           {itemDetails.artworkId ? (
             <img
-              src={`${IMG_PATH}c_scale,h_${img_size},w_${img_size}/v1/${
+              src={`${IMG_PATH}c_scale,h_${img_size},w_${img_size},f_auto/v1/${
                 itemDetails.artworkId
               }`}
               className="item-thumb"

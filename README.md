@@ -3,7 +3,7 @@ http://derkatalog.surge.sh/
 
 App build with React. Data stored in Firebase. Firebase also handles the (o)auth, so only I may add/edit records.
 
-Images hosted/sourced/cropped via Cloudinary widget.
+Images hosted/sourced/cropped via Cloudinary widget. Serves WebP where possible due to Cloudinary's awesomeness.
 
 TODOs:
 

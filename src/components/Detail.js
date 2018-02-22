@@ -94,7 +94,12 @@ class Detail extends Component {
                 publicId={details.artworkId}
                 alt={`Album cover for ${details.title}`}
               >
-                <Transformation width="800" height="800" crop="scale" />
+                <Transformation
+                  fetch-format="auto"
+                  width="800"
+                  height="800"
+                  crop="scale"
+                />
               </Image>
             </CloudinaryContext>
           ) : (
