@@ -7,8 +7,6 @@ Images hosted/sourced/cropped via Cloudinary widget.
 
 TODOs:
 
-* Search 'no results' msg.
-* Extend Redux-ification to include the album list? Might help with the above.
-* Edit screen: if keeping sliders, use onChanged (ed!) instead of onChange so as not to hammer state? And maybe refactor to use a native range input solution or a better plugin
+* Current range slider on add/edit screen is laggy. Fix this.
 * Search debouncing? Seems to work OK though.
 * 12" vs 7" option and filter?

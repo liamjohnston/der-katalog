@@ -42,6 +42,9 @@ a {
 label {
   font-weight: bold;
 }
+strong {
+  font-weight: bold;
+}
 .fw-normal {
   font-weight: normal;
 }
@@ -220,6 +223,19 @@ textarea {
     font-size: 0.7em;
   }
 }
+
+.results-msg,
+.no-results-msg {
+  padding: $gutter-sm;
+  margin: 0 $gutter-sm $gutter-lg;
+  background: #ffffb6;
+  border-left: 8px solid #ffeb3b;
+}
+.no-results-msg {
+  background: #fdd5d5;
+  border-color: 8px solid #ff8888;
+}
+
 .album-list {
   list-style-type: none;
   margin: 0;
