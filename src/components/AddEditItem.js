@@ -321,12 +321,17 @@ class AddEditItem extends Component {
                   alt={`Album cover for ${details.title}`}
                   className="w-100 mt-1"
                 >
-                  <Transformation width="800" height="800" crop="scale" />
+                  <Transformation
+                    fetch-format="auto"
+                    width="800"
+                    height="800"
+                    crop="scale"
+                  />
                 </Image>
                 <button
                   type="button"
                   onClick={this.uploadWidget.bind(this)}
-                  className="upload-button btn btn-primary btn js-center"
+                  className="upload-button btn btn-primary btn-sm btn js-center"
                 >
                   Change
                 </button>
@@ -336,7 +341,7 @@ class AddEditItem extends Component {
                 <button
                   type="button"
                   onClick={this.uploadWidget.bind(this)}
-                  className="upload-button btn btn-primary btn js-center"
+                  className="upload-button btn btn-primary btn-sm btn js-center"
                 >
                   Add image
                 </button>
@@ -390,14 +395,14 @@ class AddEditItem extends Component {
             />
           </div>
           {!this.state.saving ? (
-            <button type="submit" className="btn btn-success js-center">
+            <button type="submit" className="btn btn-primary js-center">
               {this.state.mode === 'add' ? 'Add to katalog' : 'Save changes'}
             </button>
           ) : (
             <button
               type="submit"
               disabled
-              className="btn btn-success js-center"
+              className="btn btn-primary js-center"
             >
               Saving...
             </button>

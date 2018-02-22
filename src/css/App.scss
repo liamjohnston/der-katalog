@@ -3,6 +3,7 @@ $gutter-md: 1.5rem;
 $gutter-lg: 2rem;
 $brand: #e91e63;
 $bg: #eee;
+$sticky-amount: 6rem;
 $materialBS: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 $materialBS-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
@@ -130,13 +131,10 @@ strong {
   padding: 0 0.8rem;
 }
 .btn-primary {
-  background: rgb(66, 184, 221);
+  background: $brand;
   color: #fff;
 }
-.btn-success {
-  background: rgb(28, 184, 65);
-  color: #fff;
-}
+
 .form-field {
   border: 1px solid #ccc;
   display: block;
@@ -184,12 +182,14 @@ textarea {
   z-index: 100;
 }
 .title-bar {
-  background: #222;
+  background: #fff;
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
   padding: 0 $gutter-sm;
-  height: 5rem;
+  height: $sticky-amount;
+  border-top: 4px solid $brand;
+  box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.1);
 }
 .header-title {
   font-size: 0;
@@ -205,7 +205,7 @@ textarea {
   padding: $gutter-sm;
   padding-top: 0;
   position: sticky;
-  top: 5rem;
+  top: $sticky-amount;
   background: $bg;
   > div {
     margin-top: $gutter-sm;
@@ -322,7 +322,7 @@ textarea {
     position: relative;
     z-index: 0;
     position: sticky;
-    top: 5rem;
+    top: $sticky-amount;
     left: 0;
     background: url(../img/artwork-placeholder.png) no-repeat center;
     width: 100%;
@@ -540,6 +540,12 @@ footer {
   .hide-xs {
     display: block !important;
   }
+
+  .title-bar {
+    padding-left: $gutter-md;
+    padding-right: $gutter-md;
+  }
+
   .album-list.grid-mode {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: $gutter-md;

@@ -21,6 +21,7 @@ class SortOptions extends Component {
                     : 'asc'
               })
             }
+            title="Sort by artist, ascending or descending"
           >
             <i className="icon icon-sort-alphabet" />
           </button>
@@ -38,6 +39,7 @@ class SortOptions extends Component {
                     : 'asc'
               })
             }
+            title="Sort by year, ascending or descending"
           >
             <i className="icon icon-calendar" />
           </button>
@@ -55,6 +57,7 @@ class SortOptions extends Component {
                     : 'asc'
               })
             }
+            title="Sort by rating, ascending or descending"
           >
             <i className="icon icon-star" />
           </button>

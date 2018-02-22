@@ -11,7 +11,7 @@ class SearchBox extends Component {
           className="form-field mt-xs"
           value={this.props.query}
           onChange={this.props.handleSearch}
-          placeholder="Artist or album"
+          placeholder="Artist or title"
         />
       </div>
     );

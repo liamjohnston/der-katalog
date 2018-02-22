@@ -10,18 +10,20 @@ class ViewMode extends Component {
           <button
             className={`btn ${this.props.viewMode === 'grid' ? 'active' : ''}`}
             onClick={() => this.props.changeListOption('viewMode', 'grid')}
+            title="Layout items in a grid"
           >
             <i className="icon icon-th-large" />
           </button>
           <button
             className={`btn ${this.props.viewMode === 'list' ? 'active' : ''}`}
             onClick={() => this.props.changeListOption('viewMode', 'list')}
+            title="Layout items as a list"
           >
             <i className="icon icon-list" />
           </button>
         </div>
         {this.props.itMe ? (
-          <Link to="/add" className="btn btn-success ml-1">
+          <Link to="/add" className="btn btn-primary ml-1">
             Add
           </Link>
         ) : (
