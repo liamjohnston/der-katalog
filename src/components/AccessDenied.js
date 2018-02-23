@@ -2,7 +2,7 @@ import React from 'react';
 
 const AccessDenied = () => {
   return (
-    <div className=" add-form add-wrap detail-wrap">
+    <div className="add-form add-wrap detail-wrap">
       <div className="card add-card detail-card">
         <h3 className="card-title center">ACCESS DENIED</h3>
         <img

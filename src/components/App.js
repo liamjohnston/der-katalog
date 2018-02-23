@@ -101,51 +101,50 @@ class App extends Component {
             itMe={this.state.itMe}
             {...this.props}
           />
-          <div className="wrapper">
-            <Route
-              exact
-              path="/"
-              render={props => (
-                <AlbumList
-                  items={this.state.items}
-                  itMe={this.state.itMe}
-                  query={this.props.options.query}
-                  {...this.props}
-                />
-              )}
-            />
 
-            <Route
-              path="/detail/:id"
-              render={props => <Detail itMe={this.state.itMe} {...props} />}
-            />
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <AlbumList
+                items={this.state.items}
+                itMe={this.state.itMe}
+                query={this.props.options.query}
+                {...this.props}
+              />
+            )}
+          />
 
-            <Route
-              exact
-              path="/add"
-              render={props => (
-                <AddEditItem
-                  mode="add"
-                  saveItem={this.saveItem}
-                  itMe={this.state.itMe}
-                />
-              )}
-            />
+          <Route
+            path="/detail/:id"
+            render={props => <Detail itMe={this.state.itMe} {...props} />}
+          />
 
-            <Route
-              path="/edit/:id"
-              render={props => (
-                <AddEditItem
-                  mode="edit"
-                  saveItem={this.saveItem}
-                  deleteItem={this.deleteItem}
-                  itMe={this.state.itMe}
-                />
-              )}
-            />
+          <Route
+            exact
+            path="/add"
+            render={props => (
+              <AddEditItem
+                mode="add"
+                saveItem={this.saveItem}
+                itMe={this.state.itMe}
+              />
+            )}
+          />
 
-            <Route path="/about" component={About} />
-          </div>
+          <Route
+            path="/edit/:id"
+            render={props => (
+              <AddEditItem
+                mode="edit"
+                saveItem={this.saveItem}
+                deleteItem={this.deleteItem}
+                itMe={this.state.itMe}
+              />
+            )}
+          />
+
+          <Route path="/about" component={About} />
         </Fragment>
       </Router>
     );

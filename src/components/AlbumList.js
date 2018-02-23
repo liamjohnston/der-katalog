@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import LazyLoad, { forceCheck } from 'react-lazyload';
 import PropTypes from 'prop-types';
 
@@ -147,7 +147,7 @@ class AlbumList extends Component {
     } else {
       const { viewMode, query, sortBy, filter } = this.props.options;
       return (
-        <Fragment>
+        <div className="wrapper">
           <div className="options-bar mt-2 mb-2">
             <SearchBox query={query} handleSearch={this.handleSearch} />
 
@@ -216,7 +216,7 @@ class AlbumList extends Component {
             })}
           </ul>
           <Footer />
-        </Fragment>
+        </div>
       );
     }
   }
