@@ -127,9 +127,14 @@ class AlbumList extends Component {
     //we have items for the first time: apply the IDs to state
     if (previousProps.items !== this.props.items) {
       const completeListIDs = Object.keys(this.props.items);
-      this.setState({
-        filterIDs: completeListIDs
-      });
+      this.setState(
+        {
+          filterIDs: completeListIDs
+        },
+        () => {
+          this.appplyFiltersAndWhatnot();
+        }
+      );
     }
 
     //if the options/search changes, update the list of applicable IDs in state
