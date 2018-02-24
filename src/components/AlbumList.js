@@ -203,7 +203,8 @@ class AlbumList extends Component {
                   key={key}
                   height={120}
                   placeholder={<Placeholder />}
-                  once
+                  offset={100}
+                  resize={true}
                 >
                   <ListItem
                     key={key}

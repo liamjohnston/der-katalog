@@ -74,14 +74,10 @@ class Detail extends Component {
     this.itemRef.on('value', snapshot => {
       let item = snapshot.val();
 
-      this.setState(
-        {
-          details: item
-        },
-        () => {
-          this.setState({ isLoading: false });
-        }
-      );
+      this.setState({
+        details: item,
+        isLoading: false
+      });
     });
   }
 
@@ -92,7 +88,11 @@ class Detail extends Component {
 
   render() {
     if (this.state.isLoading) {
-      return <div className="loader" />;
+      return (
+        <div className="wrapper">
+          <div className="loader" />
+        </div>
+      );
     } else {
       const details = this.state.details;
       this.setColor(details.artworkColor);
