@@ -9,19 +9,17 @@ import PropTypes from 'prop-types';
 
 import { Image, CloudinaryContext, Transformation } from 'cloudinary-react';
 import { renderStars, shadeBlend } from '../helpers';
-import base from '../firebase';
+import firebase from 'firebase';
 
 import ScrollToTopOnMount from './ScrollToTopOnMount';
-
-//should not duplicate (see ListItem.js):
-//const IMG_PATH = '//res.cloudinary.com/diouve9dy/image/upload/';
 
 class Detail extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      details: {}
+      details: {},
+      isLoading: true
     };
 
     this.setColor = this.setColor.bind(this);
@@ -63,22 +61,37 @@ class Detail extends Component {
 
   componentWillMount() {
     const item = this.props.match.params.id;
-    //  alert(item);
     //uncomment i f I end up with albums saved without a artworkColor (shouldn't happen tho)
     //I.E. change bindToState to syncState
     //base.syncState(`items/${item}`, {
-    base.bindToState(`items/${item}`, {
-      context: this,
-      state: 'details'
+    // base.syncState(`items/${item}`, {
+    //   context: this,
+    //   state: 'details'
+    // });
+
+    this.itemRef = firebase.database().ref(`items/${item}`);
+
+    this.itemRef.on('value', snapshot => {
+      let item = snapshot.val();
+
+      this.setState(
+        {
+          details: item
+        },
+        () => {
+          this.setState({ isLoading: false });
+        }
+      );
     });
   }
 
   componentWillUnmount() {
+    this.itemRef.off();
     document.body.style.removeProperty('background');
   }
 
   render() {
-    if (!Object.keys(this.state.details).length) {
+    if (this.state.isLoading) {
       return <div className="loader" />;
     } else {
       const details = this.state.details;
