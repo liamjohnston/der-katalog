@@ -61,8 +61,9 @@ class Detail extends Component {
   //   }
   // }
 
-  componentDidMount() {
+  componentWillMount() {
     const item = this.props.match.params.id;
+    //  alert(item);
     //uncomment i f I end up with albums saved without a artworkColor (shouldn't happen tho)
     //I.E. change bindToState to syncState
     //base.syncState(`items/${item}`, {

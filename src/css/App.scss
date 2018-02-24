@@ -349,7 +349,6 @@ textarea {
     }
   }
 }
-
 .card {
   background: #fff;
   box-shadow: $materialBS;
@@ -617,19 +616,13 @@ footer {
 @media (min-width: 900px) {
   .detail-wrap {
     max-width: 100%;
-    //  align-self: center;
     display: grid;
     grid-template-columns: 40rem 40rem;
-    //grid-gap: 2rem;
-    //  margin: 0 auto;
     width: auto;
     .detail-image {
       grid-column: 1;
       position: static;
     }
-    // .btn-primary {
-    //   align-self: end;
-    // }
   }
   .main-detail {
     margin-top: 0;
