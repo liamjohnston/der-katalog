@@ -339,9 +339,9 @@ textarea {
     height: 100vw;
     max-height: 40rem;
     background-size: cover;
+    box-shadow: $materialBS;
     img {
       width: 100%;
-      box-shadow: $materialBS;
     }
   }
 }

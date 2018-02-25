@@ -2,16 +2,15 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-//uncomment if I end up with albums saved without a artworkColor (shouldn't happen tho)
-//have uninstaled huery for now.
-// import image from 'get-image-data';
-// import dominant from 'huey/dominant';
-
-import { Image, CloudinaryContext, Transformation } from 'cloudinary-react';
 import { renderStars, shadeBlend } from '../helpers';
 import firebase from 'firebase';
 
 import ScrollToTopOnMount from './ScrollToTopOnMount';
+
+//duplicated from ListItem
+//NOTE, I am not using CloudinaryContext due to it blocking rendering
+//and making the whole page fail to load on mobile :///
+const IMG_PATH = '//res.cloudinary.com/diouve9dy/image/upload/';
 
 class Detail extends Component {
   constructor(props) {
@@ -23,15 +22,10 @@ class Detail extends Component {
     };
 
     this.setColor = this.setColor.bind(this);
-
-    //uncomment if I end up with albums saved without a artworkColor (shouldn't happen tho)
-    // this.setAndSaveColorIfImgButNoColor = this.setAndSaveColorIfImgButNoColor.bind(
-    //   this
-    // );
   }
 
   setColor(color = '#eeeeee') {
-    document.body.style.background = `
+    window.document.body.style.backgroundImage = `
       linear-gradient(
         ${color},
         ${shadeBlend(0.3, color)}
@@ -39,35 +33,8 @@ class Detail extends Component {
     `;
   }
 
-  //uncomment if I end up with albums saved without a artworkColor (shouldn't happen tho)
-  //only called when existing image loads...
-  //...and only does stuff if there isn't a colour already saved:
-  // setAndSaveColorIfImgButNoColor() {
-  //   if (!this.state.details.artworkColor) {
-  //     image(`${IMG_PATH}${this.state.details.artworkId}`, (error, img) => {
-  //       const color = `rgb(${dominant(img.data)})`;
-  //
-  //       const deets = { ...this.state.details };
-  //       deets.artworkColor = color;
-  //
-  //       this.setState({
-  //         details: deets
-  //       });
-  //
-  //       console.log(`${this.state.details.title} color: ${deets.artworkColor}`);
-  //     });
-  //   }
-  // }
-
   componentWillMount() {
     const item = this.props.match.params.id;
-    //uncomment i f I end up with albums saved without a artworkColor (shouldn't happen tho)
-    //I.E. change bindToState to syncState
-    //base.syncState(`items/${item}`, {
-    // base.syncState(`items/${item}`, {
-    //   context: this,
-    //   state: 'details'
-    // });
 
     this.itemRef = firebase.database().ref(`items/${item}`);
 
@@ -83,7 +50,7 @@ class Detail extends Component {
 
   componentWillUnmount() {
     this.itemRef.off();
-    document.body.style.removeProperty('background');
+    window.document.body.style.removeProperty('background-image');
   }
 
   render() {
@@ -101,30 +68,21 @@ class Detail extends Component {
           <div className="detail-wrap">
             <ScrollToTopOnMount />
 
-            {details.artworkId ? (
-              <CloudinaryContext cloudName="diouve9dy" className="detail-image">
-                {/* uncomment i f I end up with albums saved without a artworkColor (shouldn't happen tho) */}
-                {/* onLoad={this.setAndSaveColorIfImgButNoColor} */}
-                <Image
-                  publicId={details.artworkId}
+            <div className="detail-image">
+              {details.artworkId ? (
+                <img
+                  src={`${IMG_PATH}c_scale,h_800,w_800,f_auto/v1/${
+                    details.artworkId
+                  }`}
                   alt={`Album cover for ${details.title}`}
-                >
-                  <Transformation
-                    fetch-format="auto"
-                    width="800"
-                    height="800"
-                    crop="scale"
-                  />
-                </Image>
-              </CloudinaryContext>
-            ) : (
-              <div className="detail-image">
+                />
+              ) : (
                 <img
                   src={require(`../img/artwork-placeholder.png`)}
                   alt={`No artwork found for ${details.title}`}
                 />
-              </div>
-            )}
+              )}
+            </div>
 
             <div className="card detail-card main-detail">
               <h3 className="card-title center">
