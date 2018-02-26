@@ -101,7 +101,11 @@ class Detail extends Component {
               </div>
             )}
 
-            <div className="card detail-card main-detail">
+            <div
+              className={`card detail-card main-detail ${
+                details.artworkId && !this.state.imgLoaded ? 'imgNotLoaded' : ''
+              }`}
+            >
               <h3 className="card-title center">
                 {details.artist} - {details.title}
                 {details.rating <= 0 ? (
@@ -117,16 +121,22 @@ class Detail extends Component {
                   />
                 )}
               </h3>
-              <label className="card-label">Year:</label>
+              {/* <label className="card-label">Year:</label>
               <div className="detail-year card-value">{details.year}</div>
               <label className="card-label">Format:</label>
               <div className="detail-format card-value">{details.format}</div>
               <label className="card-label">Country:</label>
               <div className="detail-countey card-value">{details.country}</div>
-              <label className="card-label align-self-start">Condition:</label>
+              <label className="card-label align-self-start">Condition:</label> */}
+
+              <div>
+                {details.format} &middot; {details.year} &middot;{' '}
+                {details.country}
+              </div>
+
               <div className="card-value vard-value-split2">
                 <div>
-                  <div className="mb-s">Vinyl:</div>
+                  <div className="mb-s">Vinyl condition:</div>
                   {details.mediaCondition ? (
                     <div
                       className="stars card-value"
@@ -139,7 +149,7 @@ class Detail extends Component {
                   )}{' '}
                 </div>
                 <div>
-                  <div className="mb-s">Sleeve:</div>
+                  <div className="mb-s">Sleeve condition:</div>
                   {details.sleeveCondition ? (
                     <div
                       className="stars card-value"
@@ -154,7 +164,7 @@ class Detail extends Component {
               </div>
               {details.notes ? (
                 <Fragment>
-                  <label className="card-label align-self-start">Notes:</label>
+                  {/* <label className="card-label align-self-start">Notes:</label> */}
                   <div className="detail-notes card-value">{details.notes}</div>
                 </Fragment>
               ) : (

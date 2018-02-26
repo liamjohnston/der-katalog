@@ -86,6 +86,9 @@ strong {
 .mt-2 {
   margin-top: $gutter-md;
 }
+.mt-3 {
+  margin-top: $gutter-lg;
+}
 .mb-2 {
   margin-bottom: $gutter-md;
 }
@@ -327,7 +330,7 @@ textarea {
     grid-column: 2 / -2;
   }
   .detail-image {
-    transition: opacity 0.4s linear;
+    transition: opacity 0.3s linear;
     grid-column: 1 / -1;
     grid-row: 1;
     position: relative;
@@ -351,7 +354,7 @@ textarea {
   box-shadow: $materialBS;
   padding: 1.5rem;
 }
-.detail-card {
+.add-form {
   position: relative;
   z-index: 10;
   margin-bottom: $gutter-lg;
@@ -361,6 +364,23 @@ textarea {
   //  align-self: start; /* FF fix */
   .card-title {
     grid-column: 1 / -1;
+  }
+}
+.detail-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 3rem;
+  text-align: center;
+  padding: 0;
+  z-index: 10;
+  margin-bottom: 3rem;
+  .card-title {
+    background: #f5f5f5;
+    padding: 2rem;
+    margin: 0;
+  }
+  .btn {
+    align-self: center;
   }
 }
 .card-title {
@@ -623,16 +643,39 @@ footer {
     .detail-image {
       grid-column: 1;
       position: static;
+      z-index: 20;
     }
   }
-  .main-detail {
+  .detail-card {
+    // margin-top: 0.2rem;
+    // margin-bottom: 0.2rem;
     margin-top: 0;
     margin-bottom: 0;
-    align-self: stretch;
-    align-content: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    //  transition: 0.4s transform 0.5s ease, 0.4s opacity 0.3s linear;
+
+    &.imgNotLoaded {
+      // opacity: 0;
+      // transform: translateX(-40rem);
+    }
+
+    > * {
+      margin: 1.5rem 0;
+      padding: 0 1.5rem;
+    }
+    .card-title {
+      margin: 0;
+      margin-bottom: auto;
+    }
+    .btn {
+      margin-bottom: 2rem;
+      margin-top: auto;
+    }
   }
+
   .detail-super-wrap {
-    //margin: $gutter-md;
     max-width: 100%;
     display: flex;
     align-items: center;

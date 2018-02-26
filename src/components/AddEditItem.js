@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 
-import { Image, CloudinaryContext, Transformation } from 'cloudinary-react';
-
 import base from '../firebase';
 
 import Slider from 'react-rangeslider';
@@ -11,6 +9,9 @@ import 'react-rangeslider/lib/index.css';
 
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 import AccessDenied from './AccessDenied';
+
+//duplicated from ListItem
+const IMG_PATH = '//res.cloudinary.com/diouve9dy/image/upload/';
 
 class AddEditItem extends Component {
   constructor(props) {
@@ -183,14 +184,14 @@ class AddEditItem extends Component {
       return (
         <div className="wrapper">
           <form
-            className="form add-form add-wrap"
+            className="form add-wrap"
             ref={input => {
               this.addForm = input;
             }}
             onSubmit={this.handleSaveItem}
           >
             <ScrollToTopOnMount />
-            <div className="card add-card detail-card">
+            <div className="card add-card add-form mt-3">
               <h3 className="card-title center">Details</h3>
               <label className="card-label">Artist</label>
               <input
@@ -318,19 +319,14 @@ class AddEditItem extends Component {
               </label>
 
               {details && details.artworkId ? (
-                <CloudinaryContext cloudName="diouve9dy" className="img-wrap">
-                  <Image
-                    publicId={details.artworkId}
+                <div className="img-wrap">
+                  <img
+                    src={`${IMG_PATH}c_scale,h_800,w_800,f_auto/v1/${
+                      details.artworkId
+                    }`}
+                    className="w-100"
                     alt={`Album cover for ${details.title}`}
-                    className="w-100 mt-1"
-                  >
-                    <Transformation
-                      fetch-format="auto"
-                      width="800"
-                      height="800"
-                      crop="scale"
-                    />
-                  </Image>
+                  />
                   <button
                     type="button"
                     onClick={this.uploadWidget.bind(this)}
@@ -338,7 +334,7 @@ class AddEditItem extends Component {
                   >
                     Change
                   </button>
-                </CloudinaryContext>
+                </div>
               ) : (
                 <div>
                   <button
@@ -365,7 +361,7 @@ class AddEditItem extends Component {
                 }}
               />
             </div>
-            <div className="card add-card detail-card">
+            <div className="card add-card add-form">
               <h3 className="card-title center">My notes</h3>
               <label className="card-label">My rating</label>
               <div className="slider">

@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "cloudinary-core": "^2.4.0",
-    "cloudinary-react": "^1.0.6",
     "normalize.css": "^7.0.0",
     "prop-types": "^15.6.0",
     "re-base": "^3.2.2",
