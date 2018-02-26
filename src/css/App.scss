@@ -327,6 +327,7 @@ textarea {
     grid-column: 2 / -2;
   }
   .detail-image {
+    transition: opacity 0.4s linear;
     grid-column: 1 / -1;
     grid-row: 1;
     position: relative;

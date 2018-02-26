@@ -12,25 +12,34 @@ import ScrollToTopOnMount from './ScrollToTopOnMount';
 //and making the whole page fail to load on mobile :///
 const IMG_PATH = '//res.cloudinary.com/diouve9dy/image/upload/';
 
+const imgLoadingStyles = {
+  opacity: 0.4
+};
+
 class Detail extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       details: {},
-      isLoading: true
+      isLoading: true,
+      imgLoaded: false
     };
 
     this.setColor = this.setColor.bind(this);
+    this.setImgLoaded = this.setImgLoaded.bind(this);
   }
 
   setColor(color = '#eeeeee') {
-    window.document.body.style.backgroundImage = `
+    document.body.style.backgroundImage = `
       linear-gradient(
         ${color},
         ${shadeBlend(0.3, color)}
       )
     `;
+  }
+  setImgLoaded() {
+    this.setState({ imgLoaded: true });
   }
 
   componentWillMount() {
@@ -50,7 +59,7 @@ class Detail extends Component {
 
   componentWillUnmount() {
     this.itemRef.off();
-    window.document.body.style.removeProperty('background-image');
+    document.body.style.removeProperty('background-image');
   }
 
   render() {
@@ -68,21 +77,29 @@ class Detail extends Component {
           <div className="detail-wrap">
             <ScrollToTopOnMount />
 
-            <div className="detail-image">
-              {details.artworkId ? (
+            {details.artworkId ? (
+              <div
+                className="detail-image"
+                style={this.state.imgLoaded ? {} : imgLoadingStyles}
+              >
                 <img
                   src={`${IMG_PATH}c_scale,h_800,w_800,f_auto/v1/${
                     details.artworkId
                   }`}
                   alt={`Album cover for ${details.title}`}
+                  onLoad={() => {
+                    this.setImgLoaded();
+                  }}
                 />
-              ) : (
+              </div>
+            ) : (
+              <div className="detail-image">
                 <img
                   src={require(`../img/artwork-placeholder.png`)}
                   alt={`No artwork found for ${details.title}`}
                 />
-              )}
-            </div>
+              </div>
+            )}
 
             <div className="card detail-card main-detail">
               <h3 className="card-title center">
