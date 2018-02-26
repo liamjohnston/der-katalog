@@ -179,7 +179,12 @@ class Detail extends Component {
                   Edit details
                 </Link>
               ) : (
-                ''
+                <button
+                  className="btn btn-primary js-center mb-2 mt-2 col-span-all"
+                  onClick={this.props.login}
+                >
+                  Log in to edit
+                </button>
               )}
             </div>
           </div>

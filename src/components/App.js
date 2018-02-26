@@ -117,7 +117,9 @@ class App extends Component {
 
             <Route
               path="/detail/:id"
-              render={props => <Detail itMe={this.state.itMe} {...props} />}
+              render={props => (
+                <Detail itMe={this.state.itMe} login={this.login} {...props} />
+              )}
             />
 
             <Route
