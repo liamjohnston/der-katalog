@@ -5,7 +5,7 @@ import ScrollToTopOnMount from './ScrollToTopOnMount';
 const About = props => {
   return (
     <div className="wrapper">
-      <div className="detail-wrap">
+      <div className="content-wrap">
         <ScrollToTopOnMount />
         <div className="card mt-2">
           <h3 className="card-title center">About this site</h3>

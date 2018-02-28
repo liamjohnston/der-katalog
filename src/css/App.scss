@@ -349,6 +349,12 @@ textarea {
     }
   }
 }
+/* simple content wrapper, e.g. about page */
+.content-wrap {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: $gutter-md;
+}
 .card {
   background: #fff;
   box-shadow: $materialBS;
