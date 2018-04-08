@@ -79,6 +79,16 @@ class App extends Component {
   };
 
   componentDidMount() {
+    //grab items list from local storage (if exists)
+    const localStorageItems = localStorage.getItem('items');
+    if (localStorageItems) {
+      this.setState({
+        items: JSON.parse(localStorageItems)
+      });
+    }
+
+    //also go to firebase to get latest version of katalog
+    //(which is probably not different but could be)
     base.syncState(`items`, {
       context: this,
       state: 'items'
@@ -89,6 +99,12 @@ class App extends Component {
         this.setState({ user, itMe: true });
       }
     });
+  }
+
+  componentDidUpdate() {
+    //set local storage to the full list, by now updated
+    //todo: should I check that the items actually loaded? it seems to work well currently.
+    localStorage.setItem('items', JSON.stringify(this.state.items));
   }
 
   render() {
