@@ -83,7 +83,7 @@ class Detail extends Component {
                 style={this.state.imgLoaded ? {} : imgLoadingStyles}
               >
                 <img
-                  src={`${IMG_PATH}c_scale,h_800,w_800,f_auto/v1/${
+                  src={`${IMG_PATH}c_scale,h_840,w_840,f_auto/v1/${
                     details.artworkId
                   }`}
                   alt={`Album cover for ${details.title}`}
@@ -121,20 +121,13 @@ class Detail extends Component {
                   />
                 )}
               </h3>
-              {/* <label className="card-label">Year:</label>
-              <div className="detail-year card-value">{details.year}</div>
-              <label className="card-label">Format:</label>
-              <div className="detail-format card-value">{details.format}</div>
-              <label className="card-label">Country:</label>
-              <div className="detail-countey card-value">{details.country}</div>
-              <label className="card-label align-self-start">Condition:</label> */}
 
               <div>
                 {details.format} &middot; {details.year} &middot;{' '}
                 {details.country}
               </div>
 
-              <div className="card-value vard-value-split2">
+              <div className="card-value card-value-split2">
                 <div>
                   <div className="mb-s">Vinyl condition:</div>
                   {details.mediaCondition ? (

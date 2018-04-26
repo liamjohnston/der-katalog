@@ -321,7 +321,7 @@ class AddEditItem extends Component {
               {details && details.artworkId ? (
                 <div className="img-wrap">
                   <img
-                    src={`${IMG_PATH}c_scale,h_800,w_800,f_auto/v1/${
+                    src={`${IMG_PATH}c_scale,h_840,w_840,f_auto/v1/${
                       details.artworkId
                     }`}
                     className="w-100"
