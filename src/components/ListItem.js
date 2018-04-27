@@ -7,6 +7,19 @@ import { renderStars } from '../helpers';
 const IMG_PATH = '//res.cloudinary.com/diouve9dy/image/upload/';
 
 class ListItem extends Component {
+
+  highlighter(text, query) {
+    if (query.length >= 2 && (text.toLowerCase().includes(query.toLowerCase()))) {
+      const reg = new RegExp(query, 'gi');
+      const higlighted = text.replace(reg, function(query) {
+        return '<span class="highlight">'+query+'</span>'
+      });
+      return {__html: higlighted};
+    } else {
+      return {__html: text};
+    }
+  }
+
   render() {
     const itemDetails = this.props.details;
     const img_size = this.props.viewMode === 'grid' ? 240 : 100;
@@ -29,8 +42,8 @@ class ListItem extends Component {
             />
           )}
           <div className="item-details">
-            <div className="item-artist">{itemDetails.artist}</div>
-            <div className="item-title">{itemDetails.title}</div>
+            <div className="item-artist" dangerouslySetInnerHTML={this.highlighter(itemDetails.artist, this.props.query)}></div>
+            <div className="item-title" dangerouslySetInnerHTML={this.highlighter(itemDetails.title, this.props.query)}></div>
             {itemDetails.rating ? (
               <div
                 className="stars nowrap"

@@ -212,6 +212,7 @@ class AlbumList extends Component {
                   resize={true}
                 >
                   <ListItem
+                    query={this.props.query}
                     key={key}
                     details={this.props.items[key]}
                     renderStars={this.props.renderStars}
