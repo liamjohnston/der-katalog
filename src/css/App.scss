@@ -410,6 +410,9 @@ textarea {
 .main-detail {
   margin-top: -$gutter-md;
 }
+.detail-notes {
+  white-space: pre-wrap;
+}
 
 .get-out {
   width: 100%;
