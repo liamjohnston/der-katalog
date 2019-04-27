@@ -12,7 +12,7 @@ import About from './About';
 
 import 'normalize.css';
 import '../css/fontello.css';
-import '../css/App.min.css';
+import '../css/App.scss';
 
 class App extends Component {
   constructor() {
@@ -26,7 +26,7 @@ class App extends Component {
       items: {},
       user: null,
       liam_uid: 'zsf5lFlYrAN7sCsTsxYpoYklo9a2',
-      itMe: false
+      itMe: false,
     };
   }
 
@@ -34,7 +34,7 @@ class App extends Component {
     auth.signOut().then(() => {
       this.setState({
         user: null,
-        itMe: false
+        itMe: false,
       });
     });
   }
@@ -48,7 +48,7 @@ class App extends Component {
       }
       this.setState({
         user,
-        itMe: true
+        itMe: true,
       });
     });
   }
@@ -83,7 +83,7 @@ class App extends Component {
     const localStorageItems = localStorage.getItem('items');
     if (localStorageItems) {
       this.setState({
-        items: JSON.parse(localStorageItems)
+        items: JSON.parse(localStorageItems),
       });
     }
 
@@ -91,7 +91,7 @@ class App extends Component {
     //(which is probably not different but could be)
     base.syncState(`items`, {
       context: this,
-      state: 'items'
+      state: 'items',
     });
 
     auth.onAuthStateChanged(user => {
@@ -171,8 +171,8 @@ class App extends Component {
 App.propTypes = {
   //  options: PropTypes.object
   options: PropTypes.shape({
-    query: PropTypes.string
-  })
+    query: PropTypes.string,
+  }),
 };
 
 export default App;

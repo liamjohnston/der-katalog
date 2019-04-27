@@ -19,7 +19,7 @@ class AlbumList extends Component {
     this.updateFilterState = this.updateFilterState.bind(this);
 
     this.state = {
-      filterIDs: []
+      filterIDs: [],
     };
   }
 
@@ -48,7 +48,7 @@ class AlbumList extends Component {
 
   updateFilterState(list) {
     this.setState({
-      filterIDs: list
+      filterIDs: list,
     });
   }
 
@@ -129,7 +129,7 @@ class AlbumList extends Component {
       const completeListIDs = Object.keys(this.props.items);
       this.setState(
         {
-          filterIDs: completeListIDs
+          filterIDs: completeListIDs,
         },
         () => {
           this.appplyFiltersAndWhatnot();
@@ -237,7 +237,7 @@ AlbumList.propTypes = {
   items: PropTypes.object,
   options: PropTypes.object,
   itMe: PropTypes.bool,
-  renderStars: PropTypes.func
+  renderStars: PropTypes.func,
 };
 
 export default AlbumList;

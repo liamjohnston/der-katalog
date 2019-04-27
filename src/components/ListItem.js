@@ -1,22 +1,20 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 import { renderStars } from '../helpers';
 
 const IMG_PATH = '//res.cloudinary.com/diouve9dy/image/upload/';
 
 class ListItem extends Component {
-
   highlighter(text, query) {
-    if (query.length >= 2 && (text.toLowerCase().includes(query.toLowerCase()))) {
+    if (query.length >= 2 && text.toLowerCase().includes(query.toLowerCase())) {
       const reg = new RegExp(query, 'gi');
       const higlighted = text.replace(reg, function(query) {
-        return '<span class="highlight">'+query+'</span>'
+        return '<span class="highlight">' + query + '</span>';
       });
-      return {__html: higlighted};
+      return { __html: higlighted };
     } else {
-      return {__html: text};
+      return { __html: text };
     }
   }
 
@@ -31,6 +29,7 @@ class ListItem extends Component {
               src={`${IMG_PATH}c_scale,h_${img_size},w_${img_size},f_auto/v1/${
                 itemDetails.artworkId
               }`}
+              style={{ backgroundColor: itemDetails.artworkColor }}
               className="item-thumb"
               alt={`Album cover for ${itemDetails.title}`}
             />
@@ -42,13 +41,25 @@ class ListItem extends Component {
             />
           )}
           <div className="item-details">
-            <div className="item-artist" dangerouslySetInnerHTML={this.highlighter(itemDetails.artist, this.props.query)}></div>
-            <div className="item-title" dangerouslySetInnerHTML={this.highlighter(itemDetails.title, this.props.query)}></div>
+            <div
+              className="item-artist"
+              dangerouslySetInnerHTML={this.highlighter(
+                itemDetails.artist,
+                this.props.query
+              )}
+            />
+            <div
+              className="item-title"
+              dangerouslySetInnerHTML={this.highlighter(
+                itemDetails.title,
+                this.props.query
+              )}
+            />
             {itemDetails.rating ? (
               <div
                 className="stars nowrap"
                 dangerouslySetInnerHTML={{
-                  __html: renderStars(itemDetails.rating)
+                  __html: renderStars(itemDetails.rating),
                 }}
               />
             ) : (
@@ -75,7 +86,7 @@ class ListItem extends Component {
 
 ListItem.propTypes = {
   details: PropTypes.object,
-  viewMode: PropTypes.string
+  viewMode: PropTypes.string,
 };
 
 export default ListItem;
