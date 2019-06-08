@@ -9,6 +9,7 @@ import AlbumList from './AlbumList';
 import Detail from './Detail';
 import AddEditItem from './AddEditItem';
 import About from './About';
+import Random from './Random';
 
 import 'normalize.css';
 import '../css/fontello.css';
@@ -138,16 +139,7 @@ class App extends Component {
               )}
             />
 
-            <Route
-              path="/add"
-              render={props => (
-                <AddEditItem
-                  mode="add"
-                  saveItem={this.saveItem}
-                  itMe={this.state.itMe}
-                />
-              )}
-            />
+            <Route path="/random" render={props => <Random {...props} />} />
 
             <Route
               path="/edit/:id"
@@ -156,6 +148,17 @@ class App extends Component {
                   mode="edit"
                   saveItem={this.saveItem}
                   deleteItem={this.deleteItem}
+                  itMe={this.state.itMe}
+                />
+              )}
+            />
+
+            <Route
+              path="/add"
+              render={props => (
+                <AddEditItem
+                  mode="add"
+                  saveItem={this.saveItem}
                   itMe={this.state.itMe}
                 />
               )}

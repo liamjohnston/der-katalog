@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-
 import base from '../firebase';
 
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
 
+import { IMG_PATH } from '../constants';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 import AccessDenied from './AccessDenied';
 
 //duplicated from ListItem
-const IMG_PATH = '//res.cloudinary.com/diouve9dy/image/upload/';
 
 class AddEditItem extends Component {
   constructor(props) {
@@ -32,7 +31,7 @@ class AddEditItem extends Component {
       loading: true,
       saving: false,
       mode: this.props.mode,
-      itemId: this.props.match.params.id
+      itemId: this.props.match.params.id,
     };
   }
 
@@ -45,7 +44,7 @@ class AddEditItem extends Component {
     deets.rating = value;
 
     this.setState({
-      details: deets
+      details: deets,
     });
   };
 
@@ -54,7 +53,7 @@ class AddEditItem extends Component {
     deets.mediaCondition = value;
 
     this.setState({
-      details: deets
+      details: deets,
     });
   };
   handleSleeveConditionChange = value => {
@@ -62,7 +61,7 @@ class AddEditItem extends Component {
     deets.sleeveCondition = value;
 
     this.setState({
-      details: deets
+      details: deets,
     });
   };
 
@@ -71,7 +70,7 @@ class AddEditItem extends Component {
     deets.format = format;
 
     this.setState({
-      details: deets
+      details: deets,
     });
   }
 
@@ -82,7 +81,7 @@ class AddEditItem extends Component {
       state: 'details',
       then: () => {
         this.setState({ loading: false });
-      }
+      },
     });
   }
 
@@ -105,7 +104,7 @@ class AddEditItem extends Component {
         resource_type: 'image',
         sources: ['local', 'image_search'],
         default_source: 'image_search',
-        google_api_key: 'AIzaSyCSZIAG4DppJXAwDSW9I_bOACRmXTXkXh8'
+        google_api_key: 'AIzaSyCSZIAG4DppJXAwDSW9I_bOACRmXTXkXh8',
       },
       (error, result) => {
         if (result && result[0].url) {
@@ -114,7 +113,7 @@ class AddEditItem extends Component {
           deets.artworkColor = result[0].colors[0][0];
 
           this.setState({
-            details: deets
+            details: deets,
           });
         }
       }
@@ -126,7 +125,7 @@ class AddEditItem extends Component {
 
     this.setState(
       {
-        saving: true
+        saving: true,
       },
       () => {
         const item = {
@@ -142,7 +141,7 @@ class AddEditItem extends Component {
           artworkColor: this.artworkColor.value,
           mediaCondition: parseFloat(this.mediaCondition.value),
           sleeveCondition: parseFloat(this.sleeveCondition.value),
-          rating: parseFloat(this.rating.value)
+          rating: parseFloat(this.rating.value),
         };
 
         this.props.saveItem(item);
@@ -154,7 +153,7 @@ class AddEditItem extends Component {
   handleDeleteItem() {
     this.setState(
       {
-        saving: true //TODO: Change this line slash get it working
+        saving: true, //TODO: Change this line slash get it working
       },
       () => {
         this.props.deleteItem(this.state.itemId);
@@ -204,7 +203,8 @@ class AddEditItem extends Component {
                 }}
               />
               <label className="card-label">
-                Sort name<br />
+                Sort name
+                <br />
                 <span className="muted fw-normal text-sm">(if different)</span>
               </label>
               <input
@@ -321,9 +321,7 @@ class AddEditItem extends Component {
               {details && details.artworkId ? (
                 <div className="img-wrap">
                   <img
-                    src={`${IMG_PATH}c_scale,h_840,w_840,f_auto/v1/${
-                      details.artworkId
-                    }`}
+                    src={`${IMG_PATH}c_scale,h_840,w_840,f_auto/v1/${details.artworkId}`}
                     className="w-100"
                     alt={`Album cover for ${details.title}`}
                   />
@@ -432,15 +430,15 @@ AddEditItem.propTypes = {
   mode: PropTypes.string,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string
-    })
+      id: PropTypes.string,
+    }),
   }),
   saveItem: PropTypes.func,
   history: PropTypes.shape({
-    push: PropTypes.func
+    push: PropTypes.func,
   }),
   deleteItem: PropTypes.func,
-  itMe: PropTypes.bool
+  itMe: PropTypes.bool,
 };
 
 export default withRouter(AddEditItem);

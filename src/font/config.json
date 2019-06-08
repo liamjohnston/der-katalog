@@ -65,6 +65,12 @@
       "css": "up-small",
       "code": 59401,
       "src": "typicons"
+    },
+    {
+      "uid": "3d349daaea304032a7669b4f24931b6c",
+      "css": "shuffle",
+      "code": 59402,
+      "src": "entypo"
     }
   ]
 }

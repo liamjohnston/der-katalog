@@ -1,88 +1,76 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { renderStars } from '../helpers';
+import { IMG_PATH } from '../constants';
+import placeholder from '../img/artwork-placeholder.png';
 
-const IMG_PATH = '//res.cloudinary.com/diouve9dy/image/upload/';
-
-class ListItem extends Component {
-  highlighter(text, query) {
-    if (query.length >= 2 && text.toLowerCase().includes(query.toLowerCase())) {
-      const reg = new RegExp(query, 'gi');
-      const higlighted = text.replace(reg, function(query) {
-        return '<span class="highlight">' + query + '</span>';
-      });
-      return { __html: higlighted };
-    } else {
-      return { __html: text };
-    }
+function highlighter(text, query) {
+  if (query.length >= 2 && text.toLowerCase().includes(query.toLowerCase())) {
+    const reg = new RegExp(query, 'gi');
+    const higlighted = text.replace(reg, function(q) {
+      return `<span class="highlight">${q}</span>`;
+    });
+    return { __html: higlighted };
   }
+  return { __html: text };
+}
+const ListItem = props => {
+  const { details, viewMode, query } = props;
+  const imgSize = viewMode === 'grid' ? 240 : 100;
 
-  render() {
-    const itemDetails = this.props.details;
-    const img_size = this.props.viewMode === 'grid' ? 240 : 100;
-    return (
-      <li className="album-list-item" key={itemDetails.id}>
-        <Link to={`/detail/${itemDetails.id}`}>
-          {itemDetails.artworkId ? (
-            <img
-              src={`${IMG_PATH}c_scale,h_${img_size},w_${img_size},f_auto/v1/${
-                itemDetails.artworkId
-              }`}
-              style={{ backgroundColor: itemDetails.artworkColor }}
-              className="item-thumb"
-              alt={`Album cover for ${itemDetails.title}`}
+  return (
+    <li className="album-list-item" key={details.id}>
+      <Link to={`/detail/${details.id}`}>
+        {details.artworkId ? (
+          <img
+            src={`${IMG_PATH}c_scale,h_${imgSize},w_${imgSize},f_auto/v1/${details.artworkId}`}
+            style={{ backgroundColor: details.artworkColor }}
+            className="item-thumb"
+            alt={`Album cover for ${details.title}`}
+          />
+        ) : (
+          <img
+            className="item-thumb"
+            src={placeholder}
+            alt={`No artwork found for ${details.title}`}
+          />
+        )}
+        <div className="item-details">
+          <div
+            className="item-artist"
+            dangerouslySetInnerHTML={highlighter(details.artist, query)}
+          />
+          <div
+            className="item-title"
+            dangerouslySetInnerHTML={highlighter(details.title, query)}
+          />
+          {details.rating ? (
+            <div
+              className="stars nowrap"
+              dangerouslySetInnerHTML={{
+                __html: renderStars(details.rating),
+              }}
             />
           ) : (
-            <img
-              className="item-thumb"
-              src={require(`../img/artwork-placeholder.png`)}
-              alt={`No artwork found for ${itemDetails.title}`}
-            />
+            <div className="muted text-sm nowrap">Not rated yet</div>
           )}
-          <div className="item-details">
-            <div
-              className="item-artist"
-              dangerouslySetInnerHTML={this.highlighter(
-                itemDetails.artist,
-                this.props.query
-              )}
-            />
-            <div
-              className="item-title"
-              dangerouslySetInnerHTML={this.highlighter(
-                itemDetails.title,
-                this.props.query
-              )}
-            />
-            {itemDetails.rating ? (
-              <div
-                className="stars nowrap"
-                dangerouslySetInnerHTML={{
-                  __html: renderStars(itemDetails.rating),
-                }}
-              />
+          <div className="item-meta nowrap">
+            <span className="item-year">{details.year}</span>
+            {details.format !== 'Album' ? (
+              <Fragment>
+                {' '}
+                &middot; <span className="item-format">{details.format}</span>
+              </Fragment>
             ) : (
-              <div className="muted text-sm nowrap">Not rated yet</div>
+              ''
             )}
-            <div className="item-meta nowrap">
-              <span className="item-year">{itemDetails.year}</span>
-              {itemDetails.format !== 'Album' ? (
-                <Fragment>
-                  {' '}
-                  &middot;{' '}
-                  <span className="item-format">{itemDetails.format}</span>
-                </Fragment>
-              ) : (
-                ''
-              )}
-            </div>
           </div>
-        </Link>
-      </li>
-    );
-  }
-}
+        </div>
+      </Link>
+    </li>
+  );
+};
 
 ListItem.propTypes = {
   details: PropTypes.object,
