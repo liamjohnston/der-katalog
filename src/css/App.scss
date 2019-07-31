@@ -153,6 +153,11 @@ strong {
     height: 3.5rem;
     line-height: 3.5rem;
   }
+
+  &:focus {
+    outline: none;
+    border-color: $brand;
+  }
 }
 textarea {
   padding: 0.5rem 1rem;
@@ -422,7 +427,8 @@ textarea {
 
 .split-btns {
   .btn {
-    border: 1px solid #ccc;
+    background: #fff;
+    border: 1px solid $brand;
     margin-left: -1px;
 
     input[type='radio'],
@@ -432,7 +438,8 @@ textarea {
     }
   }
   .active {
-    background: #fff;
+    background: $brand;
+    color: #fff;
     &.sort_asc,
     &.sort_desc {
       &::after {
@@ -501,8 +508,8 @@ footer {
   display: flex;
   align-content: center;
   justify-content: center;
-  background: #ffc107;
-  border: 3px solid orange;
+  background: #fff;
+  border: 3px solid $brand;
   width: 3.5rem;
   height: 3.5rem;
   user-select: none;
@@ -516,8 +523,13 @@ footer {
 }
 .rangeslider__handle-label {
   align-self: center;
-  color: #fff;
+  color: $brand;
+  font-weight: bold;
   font-size: 1.4rem;
+}
+
+.rangeslider-horizontal .rangeslider__fill {
+  background-color: $brand;
 }
 /* END slider overrides */
 
@@ -594,8 +606,16 @@ footer {
   .album-list.grid-mode {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: $gutter-md;
-    .album-list-item {
+
+    .album-list-item a {
+      grid-template-columns: 12rem 1fr;
       box-shadow: $materialBS-sm;
+      transition: all 0.25s;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: $materialBS;
+      }
     }
   }
 
