@@ -9,4 +9,3 @@ TODOs:
 
 * Current range slider on add/edit screen is laggy. Fix this.
 * Search debouncing? Seems to work OK though.
-* 12" vs 7" option and filter?
