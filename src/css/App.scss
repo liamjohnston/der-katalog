@@ -204,7 +204,7 @@ textarea {
   padding: 0 $gutter-sm;
   height: 6rem;
   border-top: 4px solid $brand;
-  box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.1);
+  box-shadow: $materialBS-sm;
 }
 .header-title {
   font-size: 0;
@@ -219,6 +219,7 @@ textarea {
   position: sticky;
   top: $sticky-amount;
   background: $bg;
+  z-index: 1; //so that currently transitioning items don't overlap when scrolled
   > div {
     margin-top: $gutter-sm;
   }

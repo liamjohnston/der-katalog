@@ -4,7 +4,7 @@ import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 const About = props => {
   return (
-    <div className="wrapper">
+    <main role="main" className="wrapper">
       <div className="content-wrap">
         <ScrollToTopOnMount />
         <div className="card mt-2">
@@ -27,7 +27,7 @@ const About = props => {
           </p>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -181,7 +181,7 @@ class AddEditItem extends Component {
       const formats = ['Album', 'EP', 'Single'];
 
       return (
-        <div className="wrapper">
+        <main role="main" className="wrapper">
           <form
             className="form add-wrap"
             ref={input => {
@@ -420,7 +420,7 @@ class AddEditItem extends Component {
               ''
             )}
           </form>
-        </div>
+        </main>
       );
     }
   }

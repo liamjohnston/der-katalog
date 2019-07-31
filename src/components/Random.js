@@ -21,12 +21,12 @@ class Random extends Component {
 
   render() {
     return (
-      <div className="wrapper detail-super-wrap">
+      <main role="main" className="wrapper detail-super-wrap">
         <ScrollToTopOnMount />
         <div className="randomise-loading">
           <i className="icon icon-shuffle" />
         </div>
-      </div>
+      </main>
     );
   }
 }

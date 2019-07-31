@@ -147,7 +147,7 @@ class AlbumList extends Component {
     }
     const { viewMode, query, sortBy, filter } = this.props.options;
     return (
-      <div className="wrapper">
+      <main role="main" className="wrapper">
         <div className="options-bar mt-2 mb-2">
           <SearchBox query={query} handleSearch={this.handleSearch} />
 
@@ -217,7 +217,7 @@ class AlbumList extends Component {
           })}
         </ul>
         <Footer />
-      </div>
+      </main>
     );
   }
 }

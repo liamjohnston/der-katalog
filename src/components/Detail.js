@@ -64,14 +64,14 @@ class Detail extends Component {
 
     if (isLoading) {
       return (
-        <div className="wrapper">
+        <main role="main" className="wrapper">
           <div className="loader" />
-        </div>
+        </main>
       );
     }
     setColor(details.artworkColor);
     return (
-      <div className="wrapper detail-super-wrap">
+      <main role="main" className="wrapper detail-super-wrap">
         <div className="detail-wrap">
           <ScrollToTopOnMount />
 
@@ -178,7 +178,7 @@ class Detail extends Component {
             )}
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 }
