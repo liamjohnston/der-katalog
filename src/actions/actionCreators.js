@@ -1,12 +1,12 @@
 export function resetSettings() {
   return {
-    type: 'RESET_SETTINGS'
+    type: 'RESET_SETTINGS',
   };
 }
 export function searchItems(query) {
   return {
     type: 'SEARCH_ITEMS',
-    query
+    query,
   };
 }
 export function sortItems(sortBy) {
@@ -14,19 +14,19 @@ export function sortItems(sortBy) {
     type: 'SORT_ITEMS',
     sortBy: {
       sortBy: sortBy.sortBy,
-      ascDesc: sortBy.ascDesc
-    }
+      ascDesc: sortBy.ascDesc,
+    },
   };
 }
 export function filterItems(filter) {
   return {
     type: 'FILTER_ITEMS',
-    filter
+    filter,
   };
 }
 export function viewMode(viewMode) {
   return {
     type: 'CHANGE_VIEW_MODE',
-    viewMode
+    viewMode,
   };
 }

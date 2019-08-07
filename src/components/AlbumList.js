@@ -37,9 +37,11 @@ class AlbumList extends Component {
     // e.g. if a sort/filter/search has taken place but no scrolling happened
     forceCheck();
 
+    const { items, options, query } = this.props;
+
     // we have items for the first time: apply the IDs to state
-    if (previousProps.items !== this.props.items) {
-      const completeListIDs = Object.keys(this.props.items);
+    if (previousProps.items !== items) {
+      const completeListIDs = Object.keys(items);
       this.setState(
         {
           filterIDs: completeListIDs,
@@ -51,30 +53,30 @@ class AlbumList extends Component {
     }
 
     // if the options/search changes, update the list of applicable IDs in state
-    if (
-      previousProps.options !== this.props.options ||
-      previousProps.query !== this.props.query
-    ) {
+    if (previousProps.options !== options || previousProps.query !== query) {
       this.appplyFiltersAndWhatnot();
     }
   }
 
   changeListOption(option, settings) {
+    const { viewMode, sortItems, filterItems } = this.props;
+
     // yuck...
     if (option === 'viewMode') {
-      this.props.viewMode(settings);
+      viewMode(settings);
     } else if (option === 'sortBy') {
-      this.props.sortItems(settings);
+      sortItems(settings);
     } else if (option === 'filter') {
-      this.props.filterItems(settings);
+      filterItems(settings);
     }
 
     scrollTop();
   }
 
   handleSearch(event) {
+    const { searchItems } = this.props;
     const val = event.target.value;
-    this.props.searchItems(val);
+    searchItems(val);
     scrollTop();
   }
 
@@ -85,11 +87,12 @@ class AlbumList extends Component {
   }
 
   appplyFiltersAndWhatnot() {
-    const { query, sortBy, filter } = this.props.options;
+    const { options, items } = this.props;
+    const { query, sortBy, filter } = options;
 
-    const newFilterIDs = Object.keys(this.props.items)
+    const newFilterIDs = Object.keys(items)
       .filter(item => {
-        const thisOne = this.props.items[item];
+        const thisOne = items[item];
         // return everything if insufficient search length
         if (query.length < 2) {
           return thisOne;
@@ -103,7 +106,7 @@ class AlbumList extends Component {
         return false;
       })
       .filter(item => {
-        const thisOne = this.props.items[item];
+        const thisOne = items[item];
         if (filter === 'albums') {
           return thisOne.format === 'Album' ? thisOne : false;
         }
@@ -115,8 +118,8 @@ class AlbumList extends Component {
         return item;
       })
       .sort((a, b) => {
-        const itemA = this.props.items[a];
-        const itemB = this.props.items[b];
+        const itemA = items[a];
+        const itemB = items[b];
 
         if (sortBy.sortBy === 'year') {
           if (sortBy.ascDesc === 'asc') {
@@ -142,10 +145,13 @@ class AlbumList extends Component {
   }
 
   render() {
-    if (!Object.keys(this.props.items).length) {
+    const { options, itMe, items, renderStars } = this.props;
+    const { viewMode, query, sortBy, filter } = options;
+    const { filterIDs } = this.state;
+
+    if (!Object.keys(items).length) {
       return <div className="loader" />;
     }
-    const { viewMode, query, sortBy, filter } = this.props.options;
     return (
       <main role="main" className="wrapper">
         <div className="options-bar mt-2 mb-2">
@@ -164,39 +170,38 @@ class AlbumList extends Component {
           <ViewMode
             viewMode={viewMode}
             changeListOption={this.changeListOption}
-            itMe={this.props.itMe}
+            itMe={itMe}
           />
         </div>
 
         {/* searching and results */}
-        {this.state.filterIDs.length && this.props.options.query.length >= 2 ? (
+        {filterIDs.length && options.query.length >= 2 ? (
           <div className="results-msg">
-            {this.state.filterIDs.length}{' '}
-            {this.props.options.filter !== 'all'
-              ? `${this.props.options.filter} containing`
+            {filterIDs.length}{' '}
+            {options.filter !== 'all'
+              ? `${options.filter} containing`
               : 'results for'}{' '}
-            <strong>"{this.props.options.query}"</strong>
+            <strong>"{options.query}"</strong>
           </div>
         ) : (
           ''
         )}
 
         {/* searching and NO results */}
-        {!this.state.filterIDs.length &&
-        this.props.options.query.length >= 2 ? (
+        {!filterIDs.length && options.query.length >= 2 ? (
           <div className="no-results-msg">
             No{' '}
-            {this.props.options.filter !== 'all'
-              ? `${this.props.options.filter} containing`
+            {options.filter !== 'all'
+              ? `${options.filter} containing`
               : 'results for'}{' '}
-            <strong>"{this.props.options.query}"</strong>
+            <strong>"{options.query}"</strong>
           </div>
         ) : (
           ''
         )}
 
         <ul className={`album-list ${viewMode}-mode`}>
-          {this.state.filterIDs.map(key => {
+          {filterIDs.map(key => {
             return (
               <LazyLoad
                 key={key}
@@ -206,10 +211,10 @@ class AlbumList extends Component {
                 resize
               >
                 <ListItem
-                  query={this.props.query}
+                  query={query}
                   key={key}
-                  details={this.props.items[key]}
-                  renderStars={this.props.renderStars}
+                  details={items[key]}
+                  renderStars={renderStars}
                   viewMode={viewMode}
                 />
               </LazyLoad>

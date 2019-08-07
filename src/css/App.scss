@@ -236,6 +236,9 @@ textarea {
     font-size: 0.7em;
   }
 }
+.filterLabel {
+  font-weight: bold;
+}
 
 .results-msg,
 .no-results-msg {
@@ -515,6 +518,8 @@ footer {
   height: 3.5rem;
   user-select: none;
   outline: none;
+  box-shadow: none;
+
   &::after {
     content: none !important;
     display: flex;

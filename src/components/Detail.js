@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -35,15 +35,16 @@ class Detail extends Component {
   }
 
   componentWillMount() {
-    const item = this.props.match.params.id;
+    const { match } = this.props;
+    const item = match.params.id;
 
     this.itemRef = firebase.database().ref(`items/${item}`);
 
     this.itemRef.on('value', snapshot => {
-      const item = snapshot.val();
+      const details = snapshot.val();
 
       this.setState({
-        details: item,
+        details,
         isLoading: false,
       });
     });
@@ -152,10 +153,7 @@ class Detail extends Component {
               </div>
             </div>
             {details.notes ? (
-              <Fragment>
-                {/* <label className="card-label align-self-start">Notes:</label> */}
-                <div className="detail-notes card-value">{details.notes}</div>
-              </Fragment>
+              <div className="detail-notes card-value">{details.notes}</div>
             ) : (
               ''
             )}
