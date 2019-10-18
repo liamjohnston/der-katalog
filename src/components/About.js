@@ -8,7 +8,7 @@ const About = props => {
       <div className="content-wrap">
         <ScrollToTopOnMount />
         <div className="card mt-2">
-          <h3 className="card-title center">About this site</h3>
+          <h2 className="card-title center">About this site</h2>
           <p>I'm Liam and this is my modest record collection.</p>
           <p>
             The main reason I built this site so that when I'm out record
