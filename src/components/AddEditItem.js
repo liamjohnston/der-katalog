@@ -191,9 +191,12 @@ class AddEditItem extends Component {
           >
             <ScrollToTopOnMount />
             <div className="card add-card add-form mt-3">
-              <h3 className="card-title center">Details</h3>
-              <label className="card-label">Artist</label>
+              <h2 className="card-title center">Details</h2>
+              <label className="card-label" htmlFor="artist">
+                Artist
+              </label>
               <input
+                id="artist"
                 required
                 type="text"
                 className="form-field"
@@ -202,12 +205,13 @@ class AddEditItem extends Component {
                   this.artist = input;
                 }}
               />
-              <label className="card-label">
+              <label className="card-label" htmlFor="sort-name">
                 Sort name
                 <br />
                 <span className="muted fw-normal text-sm">(if different)</span>
               </label>
               <input
+                id="sort-name"
                 type="text"
                 className="form-field"
                 defaultValue={details ? details.sortUnder : ''}
@@ -215,8 +219,11 @@ class AddEditItem extends Component {
                   this.sortUnder = input;
                 }}
               />
-              <label className="card-label">Title</label>
+              <label className="card-label" htmlFor="title">
+                Title
+              </label>
               <input
+                id="title"
                 required
                 type="text"
                 className="form-field"
@@ -225,8 +232,11 @@ class AddEditItem extends Component {
                   this.title = input;
                 }}
               />
-              <label className="card-label">Year</label>
+              <label className="card-label" htmlFor="year">
+                Year
+              </label>
               <input
+                id="year"
                 type="tel"
                 className="form-field"
                 defaultValue={details ? details.year : ''}
@@ -234,8 +244,11 @@ class AddEditItem extends Component {
                   this.year = input;
                 }}
               />
-              <label className="card-label">Country</label>
+              <label className="card-label" htmlFor="country">
+                Country
+              </label>
               <input
+                id="country"
                 type="text"
                 className="form-field"
                 defaultValue={details ? details.country : ''}
@@ -360,7 +373,7 @@ class AddEditItem extends Component {
               />
             </div>
             <div className="card add-card add-form">
-              <h3 className="card-title center">My notes</h3>
+              <h2 className="card-title center">My notes</h2>
               <label className="card-label">My rating</label>
               <div className="slider">
                 <Slider
@@ -381,8 +394,11 @@ class AddEditItem extends Component {
                   }}
                 />
               </div>
-              <label className="card-label align-self-start">Notes</label>
+              <label className="card-label align-self-start" htmlFor="notes">
+                Notes
+              </label>
               <textarea
+                id="notes"
                 className="form-field"
                 rows="3"
                 defaultValue={details ? details.notes : ''}

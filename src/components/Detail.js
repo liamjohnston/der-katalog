@@ -103,7 +103,7 @@ class Detail extends Component {
               details.artworkId && !imgLoaded ? 'imgNotLoaded' : ''
             }`}
           >
-            <h3 className="card-title center">
+            <h2 className="card-title center">
               {details.artist} - {details.title}
               {details.rating <= 0 ? (
                 <div className="muted text-sm fw-normal mt-1">
@@ -117,7 +117,7 @@ class Detail extends Component {
                   }}
                 />
               )}
-            </h3>
+            </h2>
 
             <div>
               {details.format} &middot; {details.year} &middot;{' '}

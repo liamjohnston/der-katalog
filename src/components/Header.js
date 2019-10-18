@@ -9,7 +9,8 @@ const Header = props => {
     <header className="main-header">
       <div className="title-bar">
         <div className="header-title">
-          <Link to="/" onClick={resetSettings}>
+          <h1 className="u-visually-hidden">Der Katalog</h1>
+          <Link to="/" onClick={resetSettings} aria-label="Home">
             <svg width="220px" viewBox="0 0 435 35">
               <g
                 id="svgGroup"
@@ -22,7 +23,7 @@ const Header = props => {
                 style={{
                   stroke: 'none',
                   strokeWidth: '0.25mm',
-                  fill: '#e91e63',
+                  fill: '#e6004d',
                 }}
               >
                 <path
@@ -34,7 +35,11 @@ const Header = props => {
           </Link>
         </div>
 
-        <Link className="btn btn-sm u-m-r-1" to="/random">
+        <Link
+          className="btn btn-sm u-m-r-1"
+          to="/random"
+          aria-label="Choose a random record"
+        >
           <i className="icon icon-shuffle" />
         </Link>
 
@@ -61,9 +66,10 @@ const Header = props => {
 };
 
 Header.propTypes = {
-  login: PropTypes.func,
-  logout: PropTypes.func,
-  itMe: PropTypes.bool,
+  resetSettings: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  itMe: PropTypes.bool.isRequired,
 };
 
 export default Header;

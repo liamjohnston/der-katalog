@@ -6,7 +6,7 @@ const SearchBox = props => {
 
   return (
     <div className="search-wrap">
-      <div className="filterLabel">Search</div>
+      <label className="filterLabel" htmlFor="search">Search</label>
       <input
         id="search"
         className="form-field mt-xs"
@@ -19,8 +19,8 @@ const SearchBox = props => {
 };
 
 SearchBox.propTypes = {
-  handleSearch: PropTypes.func,
-  query: PropTypes.string,
+  handleSearch: PropTypes.func.isRequired,
+  query: PropTypes.string.isRequired,
 };
 
 export default SearchBox;
