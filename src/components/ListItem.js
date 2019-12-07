@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { renderStars } from '../helpers';
@@ -8,7 +8,7 @@ import placeholder from '../img/artwork-placeholder.png';
 function highlighter(text, query) {
   if (query.length >= 2 && text.toLowerCase().includes(query.toLowerCase())) {
     const reg = new RegExp(query, 'gi');
-    const higlighted = text.replace(reg, function(q) {
+    const higlighted = text.replace(reg, q => {
       return `<span class="highlight">${q}</span>`;
     });
     return { __html: higlighted };
@@ -19,12 +19,14 @@ const ListItem = props => {
   const { details, viewMode, query } = props;
   const imgSize = viewMode === 'grid' ? 240 : 100;
 
+  const img = `${IMG_PATH}c_scale,h_${imgSize},w_${imgSize},f_auto/v1/${details.artworkId}`;
+
   return (
     <li className="album-list-item" key={details.id}>
-      <Link to={`/detail/${details.id}`}>
+      <Link to={{ pathname: `/detail/${details.id}`, fallbackImg: img }}>
         {details.artworkId ? (
           <img
-            src={`${IMG_PATH}c_scale,h_${imgSize},w_${imgSize},f_auto/v1/${details.artworkId}`}
+            src={img}
             style={{ backgroundColor: details.artworkColor }}
             className="item-thumb"
             alt={`Album cover for ${details.title}`}
@@ -58,10 +60,10 @@ const ListItem = props => {
           <div className="item-meta nowrap">
             <span className="item-year">{details.year}</span>
             {details.format !== 'Album' ? (
-              <Fragment>
+              <>
                 {' '}
                 &middot; <span className="item-format">{details.format}</span>
-              </Fragment>
+              </>
             ) : (
               ''
             )}
@@ -74,7 +76,8 @@ const ListItem = props => {
 
 ListItem.propTypes = {
   details: PropTypes.object,
-  viewMode: PropTypes.string,
+  viewMode: PropTypes.string.isRequired,
+  query: PropTypes.string,
 };
 
 export default ListItem;

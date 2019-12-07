@@ -8,11 +8,7 @@ import placeholder from '../img/artwork-placeholder.png';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 import { IMG_PATH } from '../constants';
 
-const imgLoadingStyles = {
-  opacity: 0.4,
-};
-
-function setColor(color = '#eeeeee') {
+function setPageBackground(color = '#eeeeee') {
   document.body.style.backgroundImage = `
     linear-gradient(
       ${color},
@@ -61,7 +57,20 @@ class Detail extends Component {
 
   render() {
     const { isLoading, imgLoaded, details } = this.state;
-    const { itMe, login } = this.props;
+    const { itMe, login, location } = this.props;
+    const { fallbackImg } = location;
+
+    const hasFallback = !!fallbackImg;
+    let imgLoadingStyles = {
+      opacity: 0.4,
+    };
+
+    if (hasFallback) {
+      imgLoadingStyles = {
+        backgroundImage: `url(${fallbackImg})`,
+        backgroundSize: 'cover',
+      };
+    }
 
     if (isLoading) {
       return (
@@ -70,7 +79,7 @@ class Detail extends Component {
         </main>
       );
     }
-    setColor(details.artworkColor);
+    setPageBackground(details.artworkColor);
     return (
       <main role="main" className="wrapper detail-super-wrap">
         <div className="detail-wrap">
