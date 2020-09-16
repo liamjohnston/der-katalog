@@ -36,7 +36,7 @@ class Detail extends Component {
 
     this.itemRef = firebase.database().ref(`items/${item}`);
 
-    this.itemRef.on('value', snapshot => {
+    this.itemRef.on('value', (snapshot) => {
       const details = snapshot.val();
 
       this.setState({
@@ -128,61 +128,63 @@ class Detail extends Component {
               )}
             </h2>
 
-            <div>
-              {details.format} &middot; {details.year} &middot;{' '}
-              {details.country}
-            </div>
-
-            <div className="card-value card-value-split2">
+            <div className="detail-card__details">
               <div>
-                <div className="mb-s">Vinyl condition:</div>
-                {details.mediaCondition ? (
-                  <div
-                    className="stars card-value"
-                    dangerouslySetInnerHTML={{
-                      __html: renderStars(details.mediaCondition),
-                    }}
-                  />
-                ) : (
-                  <span className="muted">-</span>
-                )}{' '}
+                {details.format} &middot; {details.year} &middot;{' '}
+                {details.country}
               </div>
-              <div>
-                <div className="mb-s">Sleeve condition:</div>
-                {details.sleeveCondition ? (
-                  <div
-                    className="stars card-value"
-                    dangerouslySetInnerHTML={{
-                      __html: renderStars(details.sleeveCondition),
-                    }}
-                  />
-                ) : (
-                  <span className="muted">-</span>
-                )}
-              </div>
-            </div>
-            {details.notes ? (
-              <div className="detail-notes card-value">{details.notes}</div>
-            ) : (
-              ''
-            )}
 
-            {itMe ? (
-              <Link
-                to={`/edit/${details.id}`}
-                className="btn btn-primary js-center mb-2 mt-2 col-span-all"
-              >
-                Edit details
-              </Link>
-            ) : (
-              <button
-                type="button"
-                className="btn btn-primary js-center mb-2 mt-2 col-span-all"
-                onClick={login}
-              >
-                Log in to edit
-              </button>
-            )}
+              <div className="card-value card-value-split2">
+                <div>
+                  <div className="mb-s">Vinyl condition:</div>
+                  {details.mediaCondition ? (
+                    <div
+                      className="stars card-value"
+                      dangerouslySetInnerHTML={{
+                        __html: renderStars(details.mediaCondition),
+                      }}
+                    />
+                  ) : (
+                    <span className="muted">-</span>
+                  )}{' '}
+                </div>
+                <div>
+                  <div className="mb-s">Sleeve condition:</div>
+                  {details.sleeveCondition ? (
+                    <div
+                      className="stars card-value"
+                      dangerouslySetInnerHTML={{
+                        __html: renderStars(details.sleeveCondition),
+                      }}
+                    />
+                  ) : (
+                    <span className="muted">-</span>
+                  )}
+                </div>
+              </div>
+              {details.notes ? (
+                <div className="detail-notes card-value">{details.notes}</div>
+              ) : (
+                ''
+              )}
+
+              {itMe ? (
+                <Link
+                  to={`/edit/${details.id}`}
+                  className="btn btn-primary js-center mb-2 mt-2 col-span-all"
+                >
+                  Edit details
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn-primary js-center mb-2 mt-2 col-span-all"
+                  onClick={login}
+                >
+                  Log in to edit
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </main>
