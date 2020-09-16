@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import LazyLoad, { forceCheck } from 'react-lazyload';
 import PropTypes from 'prop-types';
 
 import ListItem from './ListItem';
-import Placeholder from './Placeholder';
 import SearchBox from './ListOptions/SearchBox';
 import FormatFilter from './ListOptions/FormatFilter';
 import SortOptions from './ListOptions/SortOptions';
@@ -33,10 +31,6 @@ class AlbumList extends Component {
 
   // not called when navigating back:
   componentDidUpdate(previousProps, previousState) {
-    // forces LazyLoad to check if placeholders need rendering,
-    // e.g. if a sort/filter/search has taken place but no scrolling happened
-    forceCheck();
-
     const { items, options, query } = this.props;
 
     // we have items for the first time: apply the IDs to state
@@ -91,7 +85,7 @@ class AlbumList extends Component {
     const { query, sortBy, filter } = options;
 
     const newFilterIDs = Object.keys(items)
-      .filter(item => {
+      .filter((item) => {
         const thisOne = items[item];
         // return everything if insufficient search length
         if (query.length < 2) {
@@ -105,7 +99,7 @@ class AlbumList extends Component {
         }
         return false;
       })
-      .filter(item => {
+      .filter((item) => {
         const thisOne = items[item];
         if (filter === 'albums') {
           return thisOne.format === 'Album' ? thisOne : false;
@@ -201,23 +195,15 @@ class AlbumList extends Component {
         )}
 
         <ul className={`album-list ${viewMode}-mode`}>
-          {filterIDs.map(key => {
+          {filterIDs.map((key) => {
             return (
-              <LazyLoad
+              <ListItem
+                query={query}
                 key={key}
-                height={120}
-                placeholder={<Placeholder />}
-                offset={100}
-                resize
-              >
-                <ListItem
-                  query={query}
-                  key={key}
-                  details={items[key]}
-                  renderStars={renderStars}
-                  viewMode={viewMode}
-                />
-              </LazyLoad>
+                details={items[key]}
+                renderStars={renderStars}
+                viewMode={viewMode}
+              />
             );
           })}
         </ul>

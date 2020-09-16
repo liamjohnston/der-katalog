@@ -299,25 +299,6 @@ textarea {
   content: ' - ';
 }
 
-.album-list-item-placeholder {
-  display: grid;
-  grid-template-columns: 12rem 1fr;
-  background: #fff;
-  .placeholder-info {
-    height: 0.9em;
-    width: 40%;
-    background: $bg;
-    &:nth-of-type(2) {
-      width: 60%;
-    }
-    &:nth-of-type(3) {
-      width: 30%;
-    }
-  }
-  .item-thumb {
-    opacity: 0.3;
-  }
-}
 .highlight {
   background: #fff27e;
   border-radius: 3px;
@@ -675,12 +656,7 @@ footer {
     .album-list-item a {
       grid-template-columns: 5rem 1fr;
     }
-    .album-list-item-placeholder {
-      grid-template-columns: 5rem 1fr;
-      .placeholder-info:nth-of-type(3) {
-        width: 100%;
-      }
-    }
+
     .item-thumb {
       width: 5rem;
       height: 5rem;

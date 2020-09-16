@@ -11,7 +11,6 @@
     "re-base": "^4.0.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-lazyload": "^2.3.0",
     "react-rangeslider": "^2.2.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",

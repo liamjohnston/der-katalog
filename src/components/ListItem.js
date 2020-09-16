@@ -8,14 +8,14 @@ import placeholder from '../img/artwork-placeholder.png';
 function highlighter(text, query) {
   if (query.length >= 2 && text.toLowerCase().includes(query.toLowerCase())) {
     const reg = new RegExp(query, 'gi');
-    const higlighted = text.replace(reg, q => {
+    const higlighted = text.replace(reg, (q) => {
       return `<span class="highlight">${q}</span>`;
     });
     return { __html: higlighted };
   }
   return { __html: text };
 }
-const ListItem = props => {
+const ListItem = (props) => {
   const { details, viewMode, query } = props;
   const imgSize = viewMode === 'grid' ? 240 : 100;
 
@@ -26,6 +26,7 @@ const ListItem = props => {
       <Link to={{ pathname: `/detail/${details.id}`, fallbackImg: img }}>
         {details.artworkId ? (
           <img
+            loading="lazy"
             src={img}
             style={{ backgroundColor: details.artworkColor }}
             className="item-thumb"
@@ -33,6 +34,7 @@ const ListItem = props => {
           />
         ) : (
           <img
+            loading="lazy"
             className="item-thumb"
             src={placeholder}
             alt={`No artwork found for ${details.title}`}
